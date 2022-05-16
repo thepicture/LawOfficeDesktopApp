@@ -1,6 +1,4 @@
 ﻿using System.ComponentModel;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace LawOfficeDesktopApp.Models.Entities
 {
@@ -14,8 +12,7 @@ namespace LawOfficeDesktopApp.Models.Entities
                 return !string.IsNullOrWhiteSpace(Login)
                        && !string.IsNullOrWhiteSpace(PhoneNumber)
                        && PhoneNumber.Length == 11
-                       && !string.IsNullOrWhiteSpace(PlainPassword)
-                       && PasswordHash != null;
+                       && !string.IsNullOrWhiteSpace(PlainPassword);
             }
         }
         public string this[string columnName]
@@ -36,23 +33,7 @@ namespace LawOfficeDesktopApp.Models.Entities
 
         public string Error => throw new System.NotImplementedException();
 
-        private string plainPassword;
         private string maskedPhoneNumber;
-
-        public string PlainPassword
-        {
-            get => plainPassword; set
-            {
-                plainPassword = value;
-                if (value != null)
-                {
-                    PasswordHash = MD5
-                        .Create()
-                        .ComputeHash(
-                            Encoding.UTF8.GetBytes(PlainPassword));
-                }
-            }
-        }
 
         public string MaskedPhoneNumber
         {

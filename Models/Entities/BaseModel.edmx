@@ -5,6 +5,15 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="LawOfficeBaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="MinimumOrBasePrice" Type="money" Nullable="false" />
+          <Property Name="MaximumPrice" Type="money" />
+        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Id" />
@@ -12,7 +21,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="PhoneNumber" Type="nvarchar" MaxLength="11" />
-          <Property Name="PasswordHash" Type="varbinary" MaxLength="1024" />
+          <Property Name="PlainPassword" Type="nvarchar" MaxLength="100" />
           <Property Name="RoleId" Type="int" Nullable="false" />
           <Property Name="LastName" Type="nvarchar" MaxLength="50" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
@@ -38,6 +47,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="LawOfficeBaseModelStoreContainer">
+          <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_User_UserRole" Association="Self.FK_User_UserRole">
@@ -50,6 +60,7 @@
     <edmx:ConceptualModels>
       <Schema Namespace="LawOfficeBaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="LawOfficeBaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Services" EntityType="LawOfficeBaseModel.Service" />
           <EntitySet Name="Users" EntityType="LawOfficeBaseModel.User" />
           <EntitySet Name="UserRoles" EntityType="LawOfficeBaseModel.UserRole" />
           <AssociationSet Name="FK_User_UserRole" Association="LawOfficeBaseModel.FK_User_UserRole">
@@ -57,6 +68,15 @@
             <End Role="User" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MinimumOrBasePrice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="MaximumPrice" Type="Decimal" Precision="19" Scale="4" />
+        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Id" />
@@ -64,7 +84,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Login" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PhoneNumber" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
-          <Property Name="PasswordHash" Type="Binary" MaxLength="1024" FixedLength="false" />
+          <Property Name="PlainPassword" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="RoleId" Type="Int32" Nullable="false" />
           <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -97,6 +117,16 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="LawOfficeBaseModelStoreContainer" CdmEntityContainer="LawOfficeBaseEntities">
+          <EntitySetMapping Name="Services">
+            <EntityTypeMapping TypeName="LawOfficeBaseModel.Service">
+              <MappingFragment StoreEntitySet="Service">
+                <ScalarProperty Name="MaximumPrice" ColumnName="MaximumPrice" />
+                <ScalarProperty Name="MinimumOrBasePrice" ColumnName="MinimumOrBasePrice" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="LawOfficeBaseModel.User">
               <MappingFragment StoreEntitySet="User">
@@ -104,7 +134,7 @@
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
-                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="PlainPassword" ColumnName="PlainPassword" />
                 <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
                 <ScalarProperty Name="Login" ColumnName="Login" />
                 <ScalarProperty Name="Id" ColumnName="Id" />

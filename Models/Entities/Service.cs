@@ -12,17 +12,11 @@ namespace LawOfficeDesktopApp.Models.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class Service
     {
         public int Id { get; set; }
-        public string Login { get; set; }
-        public string PhoneNumber { get; set; }
-        public string PlainPassword { get; set; }
-        public int RoleId { get; set; }
-        public string LastName { get; set; }
-        public string FirstName { get; set; }
-        public Nullable<int> ExperienceInYears { get; set; }
-    
-        public virtual UserRole UserRole { get; set; }
+        public string Title { get; set; }
+        public decimal MinimumOrBasePrice { get; set; }
+        public Nullable<decimal> MaximumPrice { get; set; }
     }
 }

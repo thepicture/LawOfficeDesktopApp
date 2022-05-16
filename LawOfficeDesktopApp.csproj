@@ -197,6 +197,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BaseModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Entities\Service.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Entities\User.cs">
       <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
@@ -204,6 +207,7 @@
       <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Partial\PartialEmployee.cs" />
+    <Compile Include="Models\Partial\PartialService.cs" />
     <Compile Include="Models\Partial\PartialUser.cs" />
     <Compile Include="Models\UserModels\CustomerLoginUser.cs" />
     <Compile Include="Models\UserModels\CustomerRegistrationUser.cs" />
@@ -216,12 +220,14 @@
     <Compile Include="Services\Navigator.cs" />
     <Compile Include="Services\NotificationService.cs" />
     <Compile Include="Services\CustomerRegistrationUserRepository.cs" />
+    <Compile Include="Services\ServiceRepository.cs" />
     <Compile Include="Services\UserRepository.cs" />
     <Compile Include="ViewModels\CustomerControlPanelViewModel.cs" />
     <Compile Include="ViewModels\CustomerLoginViewModel.cs" />
     <Compile Include="ViewModels\NavigatorViewModel.cs" />
     <Compile Include="ViewModels\CustomerRegistrationViewModel.cs" />
     <Compile Include="ViewModels\OurEmployeesViewModel.cs" />
+    <Compile Include="ViewModels\PriceViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Views\Controls\CustomerControlPanelView.xaml.cs">
       <DependentUpon>CustomerControlPanelView.xaml</DependentUpon>
@@ -234,6 +240,9 @@
     </Compile>
     <Compile Include="Views\Controls\OurEmployeesView.xaml.cs">
       <DependentUpon>OurEmployeesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\PriceView.xaml.cs">
+      <DependentUpon>PriceView.xaml</DependentUpon>
     </Compile>
     <Page Include="Controls\ClickableItem.xaml">
       <SubType>Designer</SubType>
@@ -276,6 +285,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Controls\OurEmployeesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\PriceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

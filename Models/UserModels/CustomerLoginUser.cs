@@ -10,8 +10,7 @@ namespace LawOfficeDesktopApp.Models.UserModels
             get
             {
                 return !string.IsNullOrWhiteSpace(Login)
-                       && !string.IsNullOrWhiteSpace(PlainPassword)
-                       && PasswordHash != null;
+                       && !string.IsNullOrWhiteSpace(PlainPassword);
             }
         }
     }

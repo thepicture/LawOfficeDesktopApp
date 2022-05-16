@@ -28,7 +28,7 @@ namespace LawOfficeDesktopApp.Services
                     {
                         Login = item.Login,
                         RoleId = 1,
-                        PasswordHash = item.PasswordHash,
+                        PlainPassword = item.PlainPassword,
                     };
                     entities.Users.Add(user);
                     try

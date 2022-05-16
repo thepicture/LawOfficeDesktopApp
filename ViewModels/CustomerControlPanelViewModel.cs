@@ -29,5 +29,23 @@ namespace LawOfficeDesktopApp.ViewModels
         {
             Navigator.Go<OurEmployeesViewModel>();
         }
+
+        private ActionCommand goToPriceViewModel;
+
+        public ICommand GoToPriceViewModel
+        {
+            get
+            {
+                if (goToPriceViewModel == null)
+                    goToPriceViewModel = new ActionCommand(PerformGoToPriceViewModel);
+
+                return goToPriceViewModel;
+            }
+        }
+
+        private void PerformGoToPriceViewModel()
+        {
+            Navigator.Go<PriceViewModel>();
+        }
     }
 }

@@ -14,4 +14,7 @@
     <DataTemplate DataType="{x:Type viewmodels:OurEmployeesViewModel}">
         <controls:OurEmployeesView />
     </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:PriceViewModel}">
+        <controls:PriceView />
+    </DataTemplate>
 </ResourceDictionary>

@@ -23,7 +23,7 @@ namespace LawOfficeDesktopApp.Services
                             .FirstOrDefault(u => u.Login == item.Login)
                                 is User currentUser)
                     {
-                        if (Enumerable.SequenceEqual(currentUser.PasswordHash, item.PasswordHash))
+                        if (currentUser.PlainPassword == item.PlainPassword)
                         {
                             App.CurrentUser = currentUser;
                             Ioc.Default
