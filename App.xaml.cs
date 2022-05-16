@@ -27,6 +27,7 @@ namespace LawOfficeDesktopApp
                     .AddSingleton<IRepository<CustomerLoginUser>, CustomerLoginUserRepository>()
                     .AddSingleton<IRepository<User>, UserRepository>()
                     .AddSingleton<IRepository<Service>, ServiceRepository>()
+                    .AddSingleton<IRepository<CustomerRequest>, CustomerRequestRepository>()
                     .AddTransient<NavigatorViewModel>()
                     .BuildServiceProvider());
             Ioc.Default

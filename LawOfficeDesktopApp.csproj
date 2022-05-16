@@ -197,6 +197,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BaseModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Entities\CustomerRequest.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Entities\Service.cs">
       <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
@@ -206,6 +209,7 @@
     <Compile Include="Models\Entities\UserRole.cs">
       <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Partial\PartialCustomerRequest.cs" />
     <Compile Include="Models\Partial\PartialEmployee.cs" />
     <Compile Include="Models\Partial\PartialService.cs" />
     <Compile Include="Models\Partial\PartialUser.cs" />
@@ -214,6 +218,7 @@
     <Compile Include="Models\UserModels\EmployeeLoginUser.cs" />
     <Compile Include="Models\UserModels\EmployeeRegistrationUser.cs" />
     <Compile Include="Services\CustomerLoginUserRepository.cs" />
+    <Compile Include="Services\CustomerRequestRepository.cs" />
     <Compile Include="Services\INavigator.cs" />
     <Compile Include="Services\INotificationService.cs" />
     <Compile Include="Services\IRepository.cs" />
@@ -222,6 +227,7 @@
     <Compile Include="Services\CustomerRegistrationUserRepository.cs" />
     <Compile Include="Services\ServiceRepository.cs" />
     <Compile Include="Services\UserRepository.cs" />
+    <Compile Include="ViewModels\AddRequestViewModel.cs" />
     <Compile Include="ViewModels\CustomerControlPanelViewModel.cs" />
     <Compile Include="ViewModels\CustomerLoginViewModel.cs" />
     <Compile Include="ViewModels\NavigatorViewModel.cs" />
@@ -229,6 +235,9 @@
     <Compile Include="ViewModels\OurEmployeesViewModel.cs" />
     <Compile Include="ViewModels\PriceViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="Views\Controls\AddRequestView.xaml.cs">
+      <DependentUpon>AddRequestView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Controls\CustomerControlPanelView.xaml.cs">
       <DependentUpon>CustomerControlPanelView.xaml</DependentUpon>
     </Compile>
@@ -272,6 +281,10 @@
       <DependentUpon>NavigatorView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\Controls\AddRequestView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Controls\CustomerControlPanelView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

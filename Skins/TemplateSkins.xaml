@@ -17,4 +17,7 @@
     <DataTemplate DataType="{x:Type viewmodels:PriceViewModel}">
         <controls:PriceView />
     </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:AddRequestViewModel}">
+        <controls:AddRequestView />
+    </DataTemplate>
 </ResourceDictionary>

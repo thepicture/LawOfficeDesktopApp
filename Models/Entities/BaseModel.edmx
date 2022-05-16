@@ -5,6 +5,15 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="LawOfficeBaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CustomerRequest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="11" Nullable="false" />
+          <Property Name="QuestionText" Type="nvarchar" MaxLength="2048" Nullable="false" />
+        </EntityType>
         <EntityType Name="Service">
           <Key>
             <PropertyRef Name="Id" />
@@ -34,6 +43,18 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
+        <Association Name="FK_CustomerRequest_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="CustomerRequest" Type="Self.CustomerRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CustomerRequest">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_User_UserRole">
           <End Role="UserRole" Type="Self.UserRole" Multiplicity="1" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
@@ -47,9 +68,14 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="LawOfficeBaseModelStoreContainer">
+          <EntitySet Name="CustomerRequest" EntityType="Self.CustomerRequest" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CustomerRequest_User" Association="Self.FK_CustomerRequest_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="CustomerRequest" EntitySet="CustomerRequest" />
+          </AssociationSet>
           <AssociationSet Name="FK_User_UserRole" Association="Self.FK_User_UserRole">
             <End Role="UserRole" EntitySet="UserRole" />
             <End Role="User" EntitySet="User" />
@@ -60,14 +86,29 @@
     <edmx:ConceptualModels>
       <Schema Namespace="LawOfficeBaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="LawOfficeBaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CustomerRequests" EntityType="LawOfficeBaseModel.CustomerRequest" />
           <EntitySet Name="Services" EntityType="LawOfficeBaseModel.Service" />
           <EntitySet Name="Users" EntityType="LawOfficeBaseModel.User" />
           <EntitySet Name="UserRoles" EntityType="LawOfficeBaseModel.UserRole" />
+          <AssociationSet Name="FK_CustomerRequest_User" Association="LawOfficeBaseModel.FK_CustomerRequest_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="CustomerRequest" EntitySet="CustomerRequests" />
+          </AssociationSet>
           <AssociationSet Name="FK_User_UserRole" Association="LawOfficeBaseModel.FK_User_UserRole">
             <End Role="UserRole" EntitySet="UserRoles" />
             <End Role="User" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="CustomerRequest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="QuestionText" Type="String" Nullable="false" MaxLength="2048" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="LawOfficeBaseModel.FK_CustomerRequest_User" FromRole="CustomerRequest" ToRole="User" />
+        </EntityType>
         <EntityType Name="Service">
           <Key>
             <PropertyRef Name="Id" />
@@ -89,6 +130,7 @@
           <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ExperienceInYears" Type="Int32" />
+          <NavigationProperty Name="CustomerRequests" Relationship="LawOfficeBaseModel.FK_CustomerRequest_User" FromRole="User" ToRole="CustomerRequest" />
           <NavigationProperty Name="UserRole" Relationship="LawOfficeBaseModel.FK_User_UserRole" FromRole="User" ToRole="UserRole" />
         </EntityType>
         <EntityType Name="UserRole">
@@ -99,6 +141,18 @@
           <Property Name="Title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Users" Relationship="LawOfficeBaseModel.FK_User_UserRole" FromRole="UserRole" ToRole="User" />
         </EntityType>
+        <Association Name="FK_CustomerRequest_User">
+          <End Type="LawOfficeBaseModel.User" Role="User" Multiplicity="1" />
+          <End Type="LawOfficeBaseModel.CustomerRequest" Role="CustomerRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CustomerRequest">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_User_UserRole">
           <End Type="LawOfficeBaseModel.UserRole" Role="UserRole" Multiplicity="1" />
           <End Type="LawOfficeBaseModel.User" Role="User" Multiplicity="*" />
@@ -117,6 +171,16 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="LawOfficeBaseModelStoreContainer" CdmEntityContainer="LawOfficeBaseEntities">
+          <EntitySetMapping Name="CustomerRequests">
+            <EntityTypeMapping TypeName="LawOfficeBaseModel.CustomerRequest">
+              <MappingFragment StoreEntitySet="CustomerRequest">
+                <ScalarProperty Name="QuestionText" ColumnName="QuestionText" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Services">
             <EntityTypeMapping TypeName="LawOfficeBaseModel.Service">
               <MappingFragment StoreEntitySet="Service">

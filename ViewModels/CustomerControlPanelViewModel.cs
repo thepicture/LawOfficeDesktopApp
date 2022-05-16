@@ -1,6 +1,4 @@
 ﻿using Microsoft.Xaml.Behaviors.Core;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
 namespace LawOfficeDesktopApp.ViewModels
@@ -46,6 +44,24 @@ namespace LawOfficeDesktopApp.ViewModels
         private void PerformGoToPriceViewModel()
         {
             Navigator.Go<PriceViewModel>();
+        }
+
+        private ActionCommand goToAddRequestViewModel;
+
+        public ICommand GoToAddRequestViewModel
+        {
+            get
+            {
+                if (goToAddRequestViewModel == null)
+                    goToAddRequestViewModel = new ActionCommand(PerformGoToAddRequestViewModel);
+
+                return goToAddRequestViewModel;
+            }
+        }
+
+        private void PerformGoToAddRequestViewModel()
+        {
+            Navigator.Go<AddRequestViewModel>();
         }
     }
 }

@@ -5,9 +5,11 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="2ca432a755cc4e2f86aecc9e16795524" Name="Diagram1">
+        <EntityTypeShape EntityType="LawOfficeBaseModel.CustomerRequest" Width="1.5" PointX="5.25" PointY="1.5" />
         <EntityTypeShape EntityType="LawOfficeBaseModel.Service" Width="1.5" PointX="0.75" PointY="4.75" />
         <EntityTypeShape EntityType="LawOfficeBaseModel.User" Width="1.5" PointX="3" PointY="1" />
-        <EntityTypeShape EntityType="LawOfficeBaseModel.UserRole" Width="1.5" PointX="0.75" PointY="1.5" />
+        <EntityTypeShape EntityType="LawOfficeBaseModel.UserRole" Width="1.5" PointX="0.75" PointY="1.625" />
+        <AssociationConnector Association="LawOfficeBaseModel.FK_CustomerRequest_User" />
         <AssociationConnector Association="LawOfficeBaseModel.FK_User_UserRole" />
       </Diagram>
     </edmx:Diagrams>

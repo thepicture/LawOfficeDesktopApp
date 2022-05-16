@@ -31,7 +31,8 @@
             <controls:ClickableItem ItemCommand="{Binding GoToPriceViewModel}"
                                     ItemText="Наш прайс"
                                     IconKind="Dollar" />
-            <controls:ClickableItem ItemText="Оставить заявку"
+            <controls:ClickableItem ItemCommand="{Binding GoToAddRequestViewModel}"
+                                    ItemText="Оставить заявку"
                                     IconKind="Email" />
             <controls:ClickableItem ItemText="Наши контакты"
                                     IconKind="Phone" />
