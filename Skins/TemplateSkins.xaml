@@ -1,0 +1,11 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:viewmodels="clr-namespace:LawOfficeDesktopApp.ViewModels"
+                    xmlns:controls="clr-namespace:LawOfficeDesktopApp.Views.Controls">
+    <DataTemplate DataType="{x:Type viewmodels:LoginViewModel}">
+        <controls:LoginView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:RegistrationViewModel}">
+        <controls:RegistrationView />
+    </DataTemplate>
+</ResourceDictionary>
