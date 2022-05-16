@@ -202,6 +202,7 @@
     <Compile Include="Models\UserModels\CustomerRegistrationUser.cs" />
     <Compile Include="Models\UserModels\EmployeeLoginUser.cs" />
     <Compile Include="Models\UserModels\EmployeeRegistrationUser.cs" />
+    <Compile Include="Services\CustomerLoginUserRepository.cs" />
     <Compile Include="Services\INavigator.cs" />
     <Compile Include="Services\INotificationService.cs" />
     <Compile Include="Services\IRepository.cs" />
@@ -209,12 +210,12 @@
     <Compile Include="Services\NotificationService.cs" />
     <Compile Include="Services\CustomerRegistrationUserRepository.cs" />
     <Compile Include="Services\UserRepository.cs" />
-    <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\CustomerLoginViewModel.cs" />
     <Compile Include="ViewModels\NavigatorViewModel.cs" />
     <Compile Include="ViewModels\CustomerRegistrationViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
-    <Compile Include="Views\Controls\LoginView.xaml.cs">
-      <DependentUpon>LoginView.xaml</DependentUpon>
+    <Compile Include="Views\Controls\CustomerLoginView.xaml.cs">
+      <DependentUpon>CustomerLoginView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Controls\CustomerRegistrationView.xaml.cs">
       <DependentUpon>CustomerRegistrationView.xaml</DependentUpon>
@@ -239,7 +240,7 @@
       <DependentUpon>NavigatorView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\Controls\LoginView.xaml">
+    <Page Include="Views\Controls\CustomerLoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

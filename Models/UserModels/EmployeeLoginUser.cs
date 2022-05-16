@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using LawOfficeDesktopApp.Models.Entities;
 
 namespace LawOfficeDesktopApp.Models.UserModels
 {
-    class EmployeeLoginUser
+    public class EmployeeLoginUser : User
     {
     }
 }

@@ -1,12 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using LawOfficeDesktopApp.Models.Entities;
 
 namespace LawOfficeDesktopApp.Models.UserModels
 {
-    class CustomerLoginUser
+    [PropertyChanged.AddINotifyPropertyChangedInterface]
+    public class CustomerLoginUser : User
     {
+        public bool IsValid
+        {
+            get
+            {
+                return !string.IsNullOrWhiteSpace(Login)
+                       && !string.IsNullOrWhiteSpace(PlainPassword);
+            }
+        }
     }
 }

@@ -1,7 +1,10 @@
-﻿namespace LawOfficeDesktopApp.Services
+﻿using System;
+
+namespace LawOfficeDesktopApp.Services
 {
     public interface INavigator<TTarget>
     {
+        event Action Navigated;
         TTarget CurrentTarget { get; }
         void GoBack();
         bool IsCanGoBack { get; }

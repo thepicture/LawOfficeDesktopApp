@@ -14,15 +14,21 @@ namespace LawOfficeDesktopApp.Services
             = new Stack<ViewModelBase>();
         public ViewModelBase CurrentTarget => Journal.Peek();
 
+        public event Action Navigated;
+
         public void Go<TWhere>() where TWhere : ViewModelBase
         {
             Journal.Push(
                 Activator.CreateInstance<TWhere>());
+            Navigated?.Invoke();
+            OnPropertyChanged(nameof(IsCanGoBack));
         }
 
         public void GoBack()
         {
             Journal.Pop();
+            Navigated?.Invoke();
+            OnPropertyChanged(nameof(IsCanGoBack));
         }
 
         public void GoToRoot()
@@ -31,6 +37,8 @@ namespace LawOfficeDesktopApp.Services
             {
                 GoBack();
             }
+            Navigated?.Invoke();
+            OnPropertyChanged(nameof(IsCanGoBack));
         }
 
         public void Go<TWhere, TParam>(TParam param)
@@ -40,6 +48,8 @@ namespace LawOfficeDesktopApp.Services
                 (ViewModelBase)
                 Activator.CreateInstance(typeof(TWhere),
                                          new object[] { param }));
+            Navigated?.Invoke();
+            OnPropertyChanged(nameof(IsCanGoBack));
         }
 
         public bool IsCanGoBack
@@ -54,7 +64,7 @@ namespace LawOfficeDesktopApp.Services
                 {
                     ViewModelBase viewModel = Journal
                         .ElementAt(1);
-                    return !(viewModel is LoginViewModel)
+                    return !(viewModel is CustomerLoginViewModel)
                            || Journal.Peek() is CustomerRegistrationViewModel;
                 }
             }

@@ -14,6 +14,7 @@ namespace LawOfficeDesktopApp
     /// </summary>
     public partial class App : Application
     {
+        public static User CurrentUser { get; set; }
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
@@ -23,10 +24,9 @@ namespace LawOfficeDesktopApp
                     .AddSingleton<INavigator<ViewModelBase>, Navigator>()
                     .AddSingleton<INotificationService, NotificationService>()
                     .AddSingleton<IRepository<CustomerRegistrationUser>, CustomerRegistrationUserRepository>()
+                    .AddSingleton<IRepository<CustomerLoginUser>, CustomerLoginUserRepository>()
                     .AddSingleton<IRepository<User>, UserRepository>()
                     .AddTransient<NavigatorViewModel>()
-                    .AddTransient<LoginViewModel>()
-                    .AddTransient<CustomerRegistrationViewModel>()
                     .BuildServiceProvider());
             Ioc.Default
                 .GetService<INavigator<ViewModelBase>>()

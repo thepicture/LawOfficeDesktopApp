@@ -34,8 +34,30 @@ namespace LawOfficeDesktopApp.ViewModels
                     .GetService<IRepository<CustomerRegistrationUser>>()
                     .CreateAsync(User))
             {
-
+                Ioc.Default
+                    .GetService<INavigator<ViewModelBase>>()
+                    .Go<CustomerLoginViewModel>();
             }
+        }
+
+        private ActionCommand goToCustomerLoginViewModel;
+
+        public ICommand GoToCustomerLoginViewModel
+        {
+            get
+            {
+                if (goToCustomerLoginViewModel == null)
+                    goToCustomerLoginViewModel = new ActionCommand(PerformGoToCustomerLoginViewModel);
+
+                return goToCustomerLoginViewModel;
+            }
+        }
+
+        private void PerformGoToCustomerLoginViewModel()
+        {
+            Ioc.Default
+                .GetService<INavigator<ViewModelBase>>()
+                .Go<CustomerLoginViewModel>();
         }
     }
 }

@@ -7,8 +7,17 @@ namespace LawOfficeDesktopApp.Models.Entities
     [PropertyChanged.AddINotifyPropertyChangedInterface]
     public partial class User : IDataErrorInfo
     {
-        public bool IsValid { get; set; }
-
+        public bool IsValid
+        {
+            get
+            {
+                return !string.IsNullOrWhiteSpace(Login)
+                       && !string.IsNullOrWhiteSpace(PhoneNumber)
+                       && PhoneNumber.Length == 11
+                       && !string.IsNullOrWhiteSpace(PlainPassword)
+                       && PasswordHash != null;
+            }
+        }
         public string this[string columnName]
         {
             get
@@ -21,7 +30,6 @@ namespace LawOfficeDesktopApp.Models.Entities
                     currentError = "Введите номер телефона";
                 if (columnName == nameof(PlainPassword) && string.IsNullOrWhiteSpace(PlainPassword))
                     currentError = "Введите пароль";
-                IsValid = currentError == null;
                 return currentError;
             }
         }
