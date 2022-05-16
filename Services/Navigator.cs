@@ -55,7 +55,7 @@ namespace LawOfficeDesktopApp.Services
                     ViewModelBase viewModel = Journal
                         .ElementAt(1);
                     return !(viewModel is LoginViewModel)
-                           || Journal.Peek() is RegistrationViewModel;
+                           || Journal.Peek() is CustomerRegistrationViewModel;
                 }
             }
         }

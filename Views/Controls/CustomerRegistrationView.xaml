@@ -1,0 +1,45 @@
+﻿<Page x:Class="LawOfficeDesktopApp.Views.Controls.CustomerRegistrationView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:LawOfficeDesktopApp.Views.Controls"
+      xmlns:viewmodels="clr-namespace:LawOfficeDesktopApp.ViewModels"
+      mc:Ignorable="d"
+      d:DataContext="{d:DesignInstance viewmodels:CustomerRegistrationViewModel}"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:controls="clr-namespace:LawOfficeDesktopApp.Controls"
+      xmlns:converters="clr-namespace:PanelSW.WPF.Controls.Converters;assembly=PanelSwWpfControls"
+      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+      TextElement.FontWeight="Regular"
+      TextElement.FontSize="13"
+      TextOptions.TextFormattingMode="Ideal"
+      TextOptions.TextRenderingMode="Auto"
+      Background="{DynamicResource MaterialDesignPaper}"
+      FontFamily="{DynamicResource MaterialDesignFont}">
+    <StackPanel VerticalAlignment="Center"
+                Margin="200,0">
+        <TextBlock Text="Регистрация"
+                   Style="{StaticResource MaterialDesignHeadline4TextBlock}"
+                   FontWeight="Bold"
+                   TextAlignment="Center" />
+        <Image Source="/Resources/law.png"
+               Stretch="Uniform"
+               Height="100"
+               Margin="0,50,0,5" />
+        <TextBox Text="{Binding User.Login, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                 materialDesign:HintAssist.Hint="Логин" />
+        <xctk:MaskedTextBox Text="{Binding User.MaskedPhoneNumber, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                            Mask="+7 (###) ###-##-##"
+                            materialDesign:HintAssist.Hint="Номер телефона" />
+        <controls:ExtendedPasswordBox BindablePassword="{Binding User.PlainPassword, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                                      IsCanShowPassword="True" />
+        <Button Content="Зарегистрироваться"
+                Command="{Binding RegisterAsCustomer}"
+                IsEnabled="{Binding User.IsValid}" />
+        <Button Content="Уже зарегистрирован"
+                Margin="0,50,0,0"
+                Style="{StaticResource MaterialDesignFlatSecondaryMidBgButton}" />
+    </StackPanel>
+</Page>

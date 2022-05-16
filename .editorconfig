@@ -5,3 +5,9 @@ csharp_style_unused_value_expression_statement_preference = discard_variable
 
 # IDE0058: Expression value is never used
 dotnet_diagnostic.IDE0058.severity = none
+
+# IDE0011: Add braces
+csharp_prefer_braces = when_multiline
+
+# IDE0046: Convert to conditional expression
+dotnet_style_prefer_conditional_expression_over_return = false
