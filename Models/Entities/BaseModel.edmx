@@ -12,8 +12,11 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="PhoneNumber" Type="nvarchar" MaxLength="11" />
-          <Property Name="PasswordHash" Type="varbinary" MaxLength="1024" Nullable="false" />
+          <Property Name="PasswordHash" Type="varbinary" MaxLength="1024" />
           <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ExperienceInYears" Type="int" />
         </EntityType>
         <EntityType Name="UserRole">
           <Key>
@@ -61,8 +64,11 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Login" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PhoneNumber" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
-          <Property Name="PasswordHash" Type="Binary" Nullable="false" MaxLength="1024" FixedLength="false" />
+          <Property Name="PasswordHash" Type="Binary" MaxLength="1024" FixedLength="false" />
           <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ExperienceInYears" Type="Int32" />
           <NavigationProperty Name="UserRole" Relationship="LawOfficeBaseModel.FK_User_UserRole" FromRole="User" ToRole="UserRole" />
         </EntityType>
         <EntityType Name="UserRole">
@@ -94,6 +100,9 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="LawOfficeBaseModel.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="ExperienceInYears" ColumnName="ExperienceInYears" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
                 <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
                 <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />

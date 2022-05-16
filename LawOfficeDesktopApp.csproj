@@ -173,8 +173,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\ClickableItem.xaml.cs">
+      <DependentUpon>ClickableItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ExtendedPasswordBox.xaml.cs">
       <DependentUpon>ExtendedPasswordBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Header.xaml.cs">
+      <DependentUpon>Header.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\Entities\BaseModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -197,6 +203,7 @@
     <Compile Include="Models\Entities\UserRole.cs">
       <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Partial\PartialEmployee.cs" />
     <Compile Include="Models\Partial\PartialUser.cs" />
     <Compile Include="Models\UserModels\CustomerLoginUser.cs" />
     <Compile Include="Models\UserModels\CustomerRegistrationUser.cs" />
@@ -210,17 +217,33 @@
     <Compile Include="Services\NotificationService.cs" />
     <Compile Include="Services\CustomerRegistrationUserRepository.cs" />
     <Compile Include="Services\UserRepository.cs" />
+    <Compile Include="ViewModels\CustomerControlPanelViewModel.cs" />
     <Compile Include="ViewModels\CustomerLoginViewModel.cs" />
     <Compile Include="ViewModels\NavigatorViewModel.cs" />
     <Compile Include="ViewModels\CustomerRegistrationViewModel.cs" />
+    <Compile Include="ViewModels\OurEmployeesViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="Views\Controls\CustomerControlPanelView.xaml.cs">
+      <DependentUpon>CustomerControlPanelView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Controls\CustomerLoginView.xaml.cs">
       <DependentUpon>CustomerLoginView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Controls\CustomerRegistrationView.xaml.cs">
       <DependentUpon>CustomerRegistrationView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Controls\OurEmployeesView.xaml.cs">
+      <DependentUpon>OurEmployeesView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Controls\ClickableItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\ExtendedPasswordBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Header.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -240,11 +263,19 @@
       <DependentUpon>NavigatorView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\Controls\CustomerControlPanelView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Controls\CustomerLoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Controls\CustomerRegistrationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\OurEmployeesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

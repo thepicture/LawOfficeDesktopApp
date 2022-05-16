@@ -5,12 +5,13 @@ namespace LawOfficeDesktopApp.Models.UserModels
     [PropertyChanged.AddINotifyPropertyChangedInterface]
     public class CustomerLoginUser : User
     {
-        public bool IsValid
+        public override bool IsValid
         {
             get
             {
                 return !string.IsNullOrWhiteSpace(Login)
-                       && !string.IsNullOrWhiteSpace(PlainPassword);
+                       && !string.IsNullOrWhiteSpace(PlainPassword)
+                       && PasswordHash != null;
             }
         }
     }

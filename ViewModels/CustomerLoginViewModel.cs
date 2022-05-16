@@ -34,7 +34,7 @@ namespace LawOfficeDesktopApp.ViewModels
                     .GetService<IRepository<CustomerLoginUser>>()
                     .CreateAsync(User))
             {
-
+                Navigator.Go<CustomerControlPanelViewModel>();
             }
         }
     }

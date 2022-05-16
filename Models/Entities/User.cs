@@ -19,6 +19,9 @@ namespace LawOfficeDesktopApp.Models.Entities
         public string PhoneNumber { get; set; }
         public byte[] PasswordHash { get; set; }
         public int RoleId { get; set; }
+        public string LastName { get; set; }
+        public string FirstName { get; set; }
+        public Nullable<int> ExperienceInYears { get; set; }
     
         public virtual UserRole UserRole { get; set; }
     }

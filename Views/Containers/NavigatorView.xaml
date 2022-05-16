@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:LawOfficeDesktopApp"
         mc:Ignorable="d"
         Title="{Binding CurrentTarget.Title}"
-        Width="900"
+        Width="1000"
         Height="650"
-        MinWidth="900"
+        MinWidth="1000"
         MinHeight="650"
         WindowStartupLocation="CenterScreen"
         xmlns:viewmodels="clr-namespace:LawOfficeDesktopApp.ViewModels"
@@ -23,14 +23,12 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition />
-        </Grid.RowDefinitions>
         <Button Content="Назад"
                 Command="{Binding GoBack}"
                 HorizontalAlignment="Right"
-                Margin="5">
+                VerticalAlignment="Top"
+                Margin="25"
+                Panel.ZIndex="1">
             <Button.Visibility>
                 <Binding Path="Navigator.IsCanGoBack">
                     <Binding.Converter>
@@ -41,7 +39,6 @@
         </Button>
         <Frame x:Name="Frame"
                Content="{Binding CurrentTarget}"
-               NavigationUIVisibility="Hidden"
-               Grid.Row="1" />
+               NavigationUIVisibility="Hidden" />
     </Grid>
 </Window>

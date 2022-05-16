@@ -8,4 +8,10 @@
     <DataTemplate DataType="{x:Type viewmodels:CustomerLoginViewModel}">
         <controls:CustomerLoginView />
     </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:CustomerControlPanelViewModel}">
+        <controls:CustomerControlPanelView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:OurEmployeesViewModel}">
+        <controls:OurEmployeesView />
+    </DataTemplate>
 </ResourceDictionary>

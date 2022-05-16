@@ -7,7 +7,7 @@ namespace LawOfficeDesktopApp.Models.Entities
     [PropertyChanged.AddINotifyPropertyChangedInterface]
     public partial class User : IDataErrorInfo
     {
-        public bool IsValid
+        public virtual bool IsValid
         {
             get
             {
