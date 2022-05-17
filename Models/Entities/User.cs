@@ -17,6 +17,7 @@ namespace LawOfficeDesktopApp.Models.Entities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
+            this.Consultations = new HashSet<Consultation>();
             this.CustomerRequests = new HashSet<CustomerRequest>();
         }
     
@@ -29,6 +30,8 @@ namespace LawOfficeDesktopApp.Models.Entities
         public string FirstName { get; set; }
         public Nullable<int> ExperienceInYears { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Consultation> Consultations { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CustomerRequest> CustomerRequests { get; set; }
         public virtual UserRole UserRole { get; set; }

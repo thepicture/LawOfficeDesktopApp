@@ -42,6 +42,6 @@ namespace LawOfficeDesktopApp.Models.Entities
             }
         }
 
-        public string Error => throw new System.NotImplementedException();
+        public string Error => null;
     }
 }

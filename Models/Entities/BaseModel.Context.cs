@@ -25,6 +25,7 @@ namespace LawOfficeDesktopApp.Models.Entities
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Consultation> Consultations { get; set; }
         public virtual DbSet<Contact> Contacts { get; set; }
         public virtual DbSet<CustomerRequest> CustomerRequests { get; set; }
         public virtual DbSet<Service> Services { get; set; }

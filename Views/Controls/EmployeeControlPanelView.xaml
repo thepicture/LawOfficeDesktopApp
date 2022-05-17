@@ -7,9 +7,147 @@
              xmlns:viewmodels="clr-namespace:LawOfficeDesktopApp.ViewModels"
              d:DataContext="{d:DesignInstance Type=viewmodels:EmployeeControlPanelViewModel}"
              mc:Ignorable="d"
-             d:DesignHeight="450"
-             d:DesignWidth="800">
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:controls="clr-namespace:LawOfficeDesktopApp.Controls"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             d:DesignWidth="1000"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal"
+             TextOptions.TextRenderingMode="Auto"
+             Background="{DynamicResource MaterialDesignPaper}"
+             FontFamily="{DynamicResource MaterialDesignFont}">
     <Grid>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <controls:Header HeaderText="Адвокатское Бюро" />
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    Grid.Row="1"
+                    Margin="0,-30,0,0">
+            <Grid Cursor="Hand"
+                  Height="130"
+                  Margin="0,0,100,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <Button Command="{Binding GoToPriceViewModel}"
+                        Height="auto"
+                        Opacity="0"
+                        Width="100"
+                        Grid.RowSpan="2" />
+                <TextBlock Text="Наш прайс"
+                           IsHitTestVisible="False"
+                           FontWeight="Medium"
+                           Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                           TextAlignment="Center" />
+                <Border BorderBrush="Purple"
+                        BorderThickness="1"
+                        Grid.Row="1"
+                        Margin="10"
+                        CornerRadius="5"
+                        Height="80"
+                        Width="80"
+                        IsHitTestVisible="False">
+                    <materialDesign:PackIcon Kind="Dollar"
+                                             Width="80"
+                                             Height="80"
+                                             HorizontalAlignment="Center"
+                                             VerticalAlignment="Center"
+                                             Margin="0" />
+                </Border>
+            </Grid>
+            <Grid Cursor="Hand"
+                  Height="130"
+                  Margin="0,0,100,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <Button Command="{Binding GoToOurEmployeesViewModel}"
+                        Height="auto"
+                        Opacity="0"
+                        Width="150"
+                        Grid.RowSpan="2" />
+                <TextBlock Text="Наш персонал"
+                           IsHitTestVisible="False"
+                           FontWeight="Medium"
+                           Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                           TextAlignment="Center" />
+                <Border BorderBrush="Purple"
+                        Grid.Row="1"
+                        BorderThickness="1"
+                        Margin="10"
+                        CornerRadius="5"
+                        Height="80"
+                        Width="80"
+                        IsHitTestVisible="False">
+                    <materialDesign:PackIcon Kind="Bank"
+                                             Width="80"
+                                             Height="80"
+                                             HorizontalAlignment="Center"
+                                             VerticalAlignment="Center"
+                                             Margin="0" />
+                </Border>
+            </Grid>
+        </StackPanel>
+        <UniformGrid Columns="2"
+                     Rows="2"
+                     Grid.Row="2"
+                     Height="400">
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center">
+            <controls:ClickableItem IconKind="UserBoxOutline" 
+                                    IsHitTestVisible="False"/>
+                <TextBlock Text="Список клиентов"
+                           IsHitTestVisible="False"
+                           Grid.Row="1"
+                           FontWeight="Medium"
+                           Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                           TextAlignment="Center" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center">
+                <controls:ClickableItem IconKind="EmailOutline"
+                                    IsHitTestVisible="False"/>
+                <TextBlock Text="Заявки"
+                           IsHitTestVisible="False"
+                           Grid.Row="1"
+                           FontWeight="Medium"
+                           Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                           TextAlignment="Center" />
+            </StackPanel>
+            <DataGrid ItemsSource="{Binding Customers}"
+                      ColumnWidth="*"
+                      IsReadOnly="True"
+                      AutoGenerateColumns="False"
+                      Margin="5">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Логин"
+                                        Binding="{Binding Login}" />
+                    <DataGridTextColumn Header="Номер телефона"
+                                        Binding="{Binding PhoneNumber}" />
+                </DataGrid.Columns>
+            </DataGrid>
+            <DataGrid ItemsSource="{Binding Consultations}"
+                      ColumnWidth="*"
+                      IsReadOnly="True"
+                      AutoGenerateColumns="False"
+                      Margin="5">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Логин"
+                                        Binding="{Binding User.Login}" />
+                    <DataGridTextColumn Header="Услуга"
+                                        Binding="{Binding Service.Title}" />
+                    <DataGridTextColumn Header="Номер телефона"
+                                        Binding="{Binding User.PhoneNumber}" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </UniformGrid>
     </Grid>
 </UserControl>

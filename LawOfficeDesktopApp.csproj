@@ -197,6 +197,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BaseModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Entities\Consultation.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Entities\Contact.cs">
       <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
@@ -218,6 +221,7 @@
     <Compile Include="Models\Partial\PartialUser.cs" />
     <Compile Include="Models\UserModels\CustomerRegistrationUser.cs" />
     <Compile Include="Models\UserModels\LoginUser.cs" />
+    <Compile Include="Services\ConsultationRepository.cs" />
     <Compile Include="Services\ContactsRepository.cs" />
     <Compile Include="Services\LoginUserRepository.cs" />
     <Compile Include="Services\CustomerRequestRepository.cs" />
