@@ -9,10 +9,14 @@ namespace LawOfficeDesktopApp.ViewModels
     [PropertyChanged.AddINotifyPropertyChangedInterface]
     public class CustomerRegistrationViewModel : ViewModelBase
     {
-        public CustomerRegistrationUser User { get; set; } = new CustomerRegistrationUser();
+        public CustomerRegistrationUser User { get; set; }
         public CustomerRegistrationViewModel()
         {
             Title = "Регистрация";
+            User = new CustomerRegistrationUser
+            {
+                RoleId = 1
+            };
         }
 
         private ActionCommand registerAsCustomer;

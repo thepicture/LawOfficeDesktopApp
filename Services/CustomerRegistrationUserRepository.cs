@@ -28,18 +28,21 @@ namespace LawOfficeDesktopApp.Services
                     {
                         Login = item.Login,
                         PhoneNumber = item.PhoneNumber,
-                        RoleId = 1,
+                        RoleId = item.RoleId,
+                        LastName = item.LastName,
+                        FirstName = item.FirstName,
+                        ExperienceInYears = item.ExperienceInYears,
                         PlainPassword = item.PlainPassword,
                     };
                     entities.Users.Add(user);
                     try
                     {
                         entities.SaveChanges();
-                        if (App.IsAddingCustomer)
+                        if (App.IsAddingUser)
                         {
                             Ioc.Default
                                 .GetService<INotificationService>()
-                                .NotifyAsync("Клиент добавлен");
+                                .NotifyAsync("Данные добавлены");
                         }
                         else
                         {
@@ -76,9 +79,42 @@ namespace LawOfficeDesktopApp.Services
             throw new NotImplementedException();
         }
 
-        public Task<bool> UpdateAsync(CustomerRegistrationUser item)
+        public async Task<bool> UpdateAsync(CustomerRegistrationUser item)
         {
-            throw new NotImplementedException();
+            return await Task.Run(() =>
+            {
+                using (LawOfficeBaseEntities entities = new LawOfficeBaseEntities())
+                {
+                    var userFromDatabase = entities.Users
+                        .First(u => u.Id == item.Id);
+                    entities.Entry(userFromDatabase).CurrentValues.SetValues(item);
+                    try
+                    {
+                        entities.SaveChanges();
+                        if (App.IsAddingUser)
+                        {
+                            Ioc.Default
+                                .GetService<INotificationService>()
+                                .NotifyAsync("Данные изменены");
+                        }
+                        else
+                        {
+
+                            Ioc.Default
+                                .GetService<INotificationService>()
+                                .NotifyAsync("Вы зарегистрированы");
+                        }
+                        return true;
+                    }
+                    catch (Exception ex)
+                    {
+                        Ioc.Default
+                            .GetService<INotificationService>()
+                            .NotifyErrorAsync(ex);
+                        return false;
+                    }
+                }
+            });
         }
     }
 }

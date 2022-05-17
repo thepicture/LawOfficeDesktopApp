@@ -1,10 +1,11 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
+using System.ComponentModel;
 using System.Linq;
 
 namespace LawOfficeDesktopApp.Models.Entities
 {
     [PropertyChanged.AddINotifyPropertyChangedInterface]
-    public partial class User : IDataErrorInfo
+    public partial class User : ObservableObject, IDataErrorInfo
     {
         public virtual bool IsValid
         {

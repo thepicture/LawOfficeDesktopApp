@@ -6,5 +6,6 @@ namespace LawOfficeDesktopApp.Models.UserModels
     [PropertyChanged.AddINotifyPropertyChangedInterface]
     public class CustomerRegistrationUser : User
     {
+        public bool IsNew => Id == 0;
     }
 }

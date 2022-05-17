@@ -38,4 +38,7 @@
     <DataTemplate DataType="{x:Type viewmodels:AddConsultationViewModel}">
         <controls:AddConsultationView />
     </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:AddEditEmployeeViewModel}">
+        <controls:AddEditEmployeeView />
+    </DataTemplate>
 </ResourceDictionary>

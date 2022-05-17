@@ -30,7 +30,7 @@ namespace LawOfficeDesktopApp.ViewModels
 
         private async void PerformRegisterAsCustomerAsync()
         {
-            App.IsAddingCustomer = true;
+            App.IsAddingUser = true;
             if (await Ioc.Default
                     .GetService<IRepository<CustomerRegistrationUser>>()
                     .CreateAsync(User))
@@ -39,7 +39,7 @@ namespace LawOfficeDesktopApp.ViewModels
                 StrongReferenceMessenger.Default
                     .Send("LoadCustomersAsync");
             }
-            App.IsAddingCustomer = true;
+            App.IsAddingUser = true;
         }
     }
 }

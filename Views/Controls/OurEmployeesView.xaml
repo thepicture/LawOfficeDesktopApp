@@ -23,9 +23,11 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
                 <RowDefinition />
-            </Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
             <controls:Header HeaderText="Наши работники" BorderWidth="0"/>
             <DataGrid ItemsSource="{Binding OurEmployees}"
+                      SelectedItem="{Binding SelectedEmployee}"
                       AutoGenerateColumns="False"
                       IsReadOnly="True"
                       ColumnWidth="*"
@@ -36,5 +38,25 @@
                     <DataGridTextColumn Header="Опыт работы" Binding="{Binding ExperienceInYearsAsString}"/>
                 </DataGrid.Columns>
             </DataGrid>
+        <StackPanel Grid.Row="2">
+            <StackPanel.Visibility>
+                <Binding Path="IsAdmin">
+                    <Binding.Converter>
+                        <BooleanToVisibilityConverter />
+                    </Binding.Converter>
+                </Binding>
+            </StackPanel.Visibility>
+            <UniformGrid Columns="2">
+                <Button Command="{Binding AddEmployeeCommand}"
+                        Content="Добавить"
+                        Margin="15" />
+                <Button Command="{Binding ChangeEmployeeCommand}"
+                        Content="Изменить"
+                        Margin="15" />
+            </UniformGrid>
+            <Button Command="{Binding DeleteEmployeeCommand}"
+                    Content="Удалить"
+                    Margin="15" />
+        </StackPanel>
         </Grid>
 </Page>

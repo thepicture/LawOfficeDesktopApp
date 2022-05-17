@@ -32,7 +32,7 @@ namespace LawOfficeDesktopApp.Services
                         entities.SaveChanges();
                         Ioc.Default
                             .GetService<INotificationService>()
-                            .NotifyAsync("Клиент удалён");
+                            .NotifyAsync("Данные удалены");
                         return true;
                     }
                     catch (Exception ex)

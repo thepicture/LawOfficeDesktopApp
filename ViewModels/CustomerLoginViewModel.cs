@@ -9,10 +9,11 @@ namespace LawOfficeDesktopApp.ViewModels
     [PropertyChanged.AddINotifyPropertyChangedInterface]
     public class CustomerLoginViewModel : ViewModelBase
     {
-        public LoginUser User { get; set; } = new LoginUser();
+        public LoginUser User { get; set; }
         public CustomerLoginViewModel()
         {
             Title = "Авторизация";
+            User = new LoginUser();
         }
 
         private ActionCommand loginAsCustomer;
