@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace LawOfficeDesktopApp.Services
 {
-    public class CustomerLoginUserRepository : IRepository<CustomerLoginUser>
+    public class LoginUserRepository : IRepository<LoginUser>
     {
-        public async Task<bool> CreateAsync(CustomerLoginUser item)
+        public async Task<bool> CreateAsync(LoginUser item)
         {
             return await Task.Run(() =>
             {
@@ -45,17 +45,17 @@ namespace LawOfficeDesktopApp.Services
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<CustomerLoginUser>> GetAllAsync()
+        public Task<IEnumerable<LoginUser>> GetAllAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task<CustomerLoginUser> GetSingleAsync(object id)
+        public Task<LoginUser> GetSingleAsync(object id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> UpdateAsync(CustomerLoginUser item)
+        public Task<bool> UpdateAsync(LoginUser item)
         {
             throw new NotImplementedException();
         }

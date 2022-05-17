@@ -3,7 +3,7 @@
 namespace LawOfficeDesktopApp.Models.UserModels
 {
     [PropertyChanged.AddINotifyPropertyChangedInterface]
-    public class CustomerLoginUser : User
+    public class LoginUser : User
     {
         public override bool IsValid
         {

@@ -38,9 +38,13 @@
         <Button Content="Зарегистрироваться"
                 Command="{Binding RegisterAsCustomer}"
                 IsEnabled="{Binding User.IsValid}" />
-        <Button Content="Уже зарегистрирован"
-                Command="{Binding GoToCustomerLoginViewModel}"
+        <Button Content="Уже зарегистрирован как персонал"
+                Command="{Binding GoToEmployeeLoginViewModel}"
                 Margin="0,50,0,0"
+                Style="{StaticResource MaterialDesignFlatSecondaryMidBgButton}" />
+        <Button Content="Уже зарегистрирован как клиент"
+                Command="{Binding GoToCustomerLoginViewModel}"
+                Margin="0,10,0,0"
                 Style="{StaticResource MaterialDesignFlatSecondaryMidBgButton}" />
     </StackPanel>
 </Page>

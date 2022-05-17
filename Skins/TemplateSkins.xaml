@@ -26,4 +26,10 @@
     <DataTemplate DataType="{x:Type viewmodels:ContactsViewModel}">
         <controls:ContactsView />
     </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:EmployeeLoginViewModel}">
+        <controls:EmployeeLoginView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:EmployeeControlPanelViewModel}">
+        <controls:EmployeeControlPanelView/>
+    </DataTemplate>
 </ResourceDictionary>

@@ -9,7 +9,7 @@ namespace LawOfficeDesktopApp.ViewModels
     [PropertyChanged.AddINotifyPropertyChangedInterface]
     public class CustomerLoginViewModel : ViewModelBase
     {
-        public CustomerLoginUser User { get; set; } = new CustomerLoginUser();
+        public LoginUser User { get; set; } = new LoginUser();
         public CustomerLoginViewModel()
         {
             Title = "Авторизация";
@@ -31,7 +31,7 @@ namespace LawOfficeDesktopApp.ViewModels
         private async void PerformLoginAsCustomerAsync()
         {
             if (await Ioc.Default
-                    .GetService<IRepository<CustomerLoginUser>>()
+                    .GetService<IRepository<LoginUser>>()
                     .CreateAsync(User))
             {
                 Navigator.Go<CustomerControlPanelViewModel>();

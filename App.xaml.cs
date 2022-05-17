@@ -24,7 +24,7 @@ namespace LawOfficeDesktopApp
                     .AddSingleton<INavigator<ViewModelBase>, Navigator>()
                     .AddSingleton<INotificationService, NotificationService>()
                     .AddSingleton<IRepository<CustomerRegistrationUser>, CustomerRegistrationUserRepository>()
-                    .AddSingleton<IRepository<CustomerLoginUser>, CustomerLoginUserRepository>()
+                    .AddSingleton<IRepository<LoginUser>, LoginUserRepository>()
                     .AddSingleton<IRepository<User>, UserRepository>()
                     .AddSingleton<IRepository<Service>, ServiceRepository>()
                     .AddSingleton<IRepository<CustomerRequest>, CustomerRequestRepository>()

@@ -55,9 +55,25 @@ namespace LawOfficeDesktopApp.ViewModels
 
         private void PerformGoToCustomerLoginViewModel()
         {
-            Ioc.Default
-                .GetService<INavigator<ViewModelBase>>()
-                .Go<CustomerLoginViewModel>();
+            Navigator.Go<CustomerLoginViewModel>();
+        }
+
+        private ActionCommand goToEmployeeLoginViewModel;
+
+        public ICommand GoToEmployeeLoginViewModel
+        {
+            get
+            {
+                if (goToEmployeeLoginViewModel == null)
+                    goToEmployeeLoginViewModel = new ActionCommand(PerformGoToEmployeeLoginViewModel);
+
+                return goToEmployeeLoginViewModel;
+            }
+        }
+
+        private void PerformGoToEmployeeLoginViewModel()
+        {
+            Navigator.Go<EmployeeLoginViewModel>();
         }
     }
 }

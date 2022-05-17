@@ -216,12 +216,10 @@
     <Compile Include="Models\Partial\PartialEmployee.cs" />
     <Compile Include="Models\Partial\PartialService.cs" />
     <Compile Include="Models\Partial\PartialUser.cs" />
-    <Compile Include="Models\UserModels\CustomerLoginUser.cs" />
     <Compile Include="Models\UserModels\CustomerRegistrationUser.cs" />
-    <Compile Include="Models\UserModels\EmployeeLoginUser.cs" />
-    <Compile Include="Models\UserModels\EmployeeRegistrationUser.cs" />
+    <Compile Include="Models\UserModels\LoginUser.cs" />
     <Compile Include="Services\ContactsRepository.cs" />
-    <Compile Include="Services\CustomerLoginUserRepository.cs" />
+    <Compile Include="Services\LoginUserRepository.cs" />
     <Compile Include="Services\CustomerRequestRepository.cs" />
     <Compile Include="Services\INavigator.cs" />
     <Compile Include="Services\INotificationService.cs" />
@@ -235,6 +233,8 @@
     <Compile Include="ViewModels\ContactsViewModel.cs" />
     <Compile Include="ViewModels\CustomerControlPanelViewModel.cs" />
     <Compile Include="ViewModels\CustomerLoginViewModel.cs" />
+    <Compile Include="ViewModels\EmployeeControlPanelViewModel.cs" />
+    <Compile Include="ViewModels\EmployeeLoginViewModel.cs" />
     <Compile Include="ViewModels\MyAccountViewModel.cs" />
     <Compile Include="ViewModels\NavigatorViewModel.cs" />
     <Compile Include="ViewModels\CustomerRegistrationViewModel.cs" />
@@ -255,6 +255,12 @@
     </Compile>
     <Compile Include="Views\Controls\CustomerRegistrationView.xaml.cs">
       <DependentUpon>CustomerRegistrationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\EmployeeControlPanelView.xaml.cs">
+      <DependentUpon>EmployeeControlPanelView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\EmployeeLoginView.xaml.cs">
+      <DependentUpon>EmployeeLoginView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Controls\MyAccountView.xaml.cs">
       <DependentUpon>MyAccountView.xaml</DependentUpon>
@@ -310,6 +316,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Controls\CustomerRegistrationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\EmployeeControlPanelView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\EmployeeLoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
