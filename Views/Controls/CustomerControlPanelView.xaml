@@ -34,7 +34,8 @@
             <controls:ClickableItem ItemCommand="{Binding GoToAddRequestViewModel}"
                                     ItemText="Оставить заявку"
                                     IconKind="Email" />
-            <controls:ClickableItem ItemText="Наши контакты"
+            <controls:ClickableItem ItemCommand="{Binding GoToContactsViewModel}"
+                                    ItemText="Наши контакты"
                                     IconKind="Phone" />
             <controls:ClickableItem ItemCommand="{Binding GoToMyAccountViewModel}"
                                     ItemText="Личный кабинет"

@@ -5,6 +5,16 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="LawOfficeBaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="18" Nullable="false" />
+          <Property Name="StartWorkTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="EndWorkTime" Type="time" Precision="7" Nullable="false" />
+        </EntityType>
         <EntityType Name="CustomerRequest">
           <Key>
             <PropertyRef Name="Id" />
@@ -68,6 +78,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="LawOfficeBaseModelStoreContainer">
+          <EntitySet Name="Contact" EntityType="Self.Contact" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CustomerRequest" EntityType="Self.CustomerRequest" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
@@ -86,6 +97,7 @@
     <edmx:ConceptualModels>
       <Schema Namespace="LawOfficeBaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="LawOfficeBaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Contacts" EntityType="LawOfficeBaseModel.Contact" />
           <EntitySet Name="CustomerRequests" EntityType="LawOfficeBaseModel.CustomerRequest" />
           <EntitySet Name="Services" EntityType="LawOfficeBaseModel.Service" />
           <EntitySet Name="Users" EntityType="LawOfficeBaseModel.User" />
@@ -99,6 +111,16 @@
             <End Role="User" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="18" FixedLength="false" Unicode="true" />
+          <Property Name="StartWorkTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="EndWorkTime" Type="Time" Nullable="false" Precision="7" />
+        </EntityType>
         <EntityType Name="CustomerRequest">
           <Key>
             <PropertyRef Name="Id" />
@@ -171,6 +193,17 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="LawOfficeBaseModelStoreContainer" CdmEntityContainer="LawOfficeBaseEntities">
+          <EntitySetMapping Name="Contacts">
+            <EntityTypeMapping TypeName="LawOfficeBaseModel.Contact">
+              <MappingFragment StoreEntitySet="Contact">
+                <ScalarProperty Name="EndWorkTime" ColumnName="EndWorkTime" />
+                <ScalarProperty Name="StartWorkTime" ColumnName="StartWorkTime" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="CustomerRequests">
             <EntityTypeMapping TypeName="LawOfficeBaseModel.CustomerRequest">
               <MappingFragment StoreEntitySet="CustomerRequest">

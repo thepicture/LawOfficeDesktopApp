@@ -23,4 +23,7 @@
     <DataTemplate DataType="{x:Type viewmodels:MyAccountViewModel}">
         <controls:MyAccountView />
     </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:ContactsViewModel}">
+        <controls:ContactsView />
+    </DataTemplate>
 </ResourceDictionary>

@@ -81,5 +81,23 @@ namespace LawOfficeDesktopApp.ViewModels
         {
             Navigator.Go<MyAccountViewModel>();
         }
+
+        private ActionCommand goToContactsViewModel;
+
+        public ICommand GoToContactsViewModel
+        {
+            get
+            {
+                if (goToContactsViewModel == null)
+                    goToContactsViewModel = new ActionCommand(PerformGoToContactsViewModel);
+
+                return goToContactsViewModel;
+            }
+        }
+
+        private void PerformGoToContactsViewModel()
+        {
+            Navigator.Go<ContactsViewModel>();
+        }
     }
 }
