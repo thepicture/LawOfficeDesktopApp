@@ -21,8 +21,8 @@
 
     <Grid>
         <StackPanel VerticalAlignment="Center"
-                    Margin="200,0">
-            <controls:Header HeaderText="Добавить персонал"
+                    Margin="150,0">
+            <controls:Header HeaderText="{Binding Title}"
                              BorderWidth="0" />
             <TextBox Text="{Binding Employee.Login, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                      materialDesign:HintAssist.Hint="Логин"

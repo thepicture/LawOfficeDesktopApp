@@ -1,0 +1,55 @@
+﻿<Page x:Class="LawOfficeDesktopApp.Views.Controls.AddEditServiceView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:LawOfficeDesktopApp.Views.Controls"
+      xmlns:viewmodels="clr-namespace:LawOfficeDesktopApp.ViewModels"
+      d:DataContext="{d:DesignInstance Type=viewmodels:AddEditServiceViewModel}"
+      mc:Ignorable="d"
+      d:DesignHeight="450"
+      d:DesignWidth="800"
+      Title="AddEditServiceView"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+      xmlns:controls="clr-namespace:LawOfficeDesktopApp.Controls"
+      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+      TextElement.FontWeight="Regular"
+      TextElement.FontSize="13"
+      TextOptions.TextFormattingMode="Ideal"
+      TextOptions.TextRenderingMode="Auto"
+      Background="{DynamicResource MaterialDesignPaper}"
+      FontFamily="{DynamicResource MaterialDesignFont}">
+    <StackPanel VerticalAlignment="Center"
+                Margin="200,0">
+        <controls:Header HeaderText="{Binding Title}"
+                         BorderWidth="0" />
+        <TextBox Text="{Binding Service.Title, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                 materialDesign:HintAssist.Hint="Наименование услуги"
+                 Style="{StaticResource MaterialDesignFilledTextBox}"
+                 Margin="0,5" />
+        <Grid Margin="0,15">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <TextBox Text="{Binding Service.MinimumOrBasePrice, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                     materialDesign:HintAssist.Hint="Минимальная цена в руб."
+                     Style="{StaticResource MaterialDesignFilledTextBox}"
+                     Margin="0,5" />
+            <TextBox Text="{Binding Service.MaximumPrice, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                     materialDesign:HintAssist.Hint="Максимальная цена в руб."
+                     Style="{StaticResource MaterialDesignFilledTextBox}"
+                     IsEnabled="{Binding Service.IsHasMaximumPrice}"
+                     Margin="0,5" 
+                     Grid.Column="2"/>
+        </Grid>
+        <CheckBox Content="Есть максимальная цена"
+                  IsChecked="{Binding Service.IsHasMaximumPrice}"/>
+        <Button Content="Cохранить данные"
+                Margin="0,20,0,0"
+                Command="{Binding SaveChanges}"
+                IsEnabled="{Binding Service.IsValid}" />
+    </StackPanel>
+</Page>

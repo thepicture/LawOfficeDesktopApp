@@ -62,7 +62,9 @@
           <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <Association Name="FK_Consultation_Service">
-          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="Service" Type="Self.Service" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Consultation" Type="Self.Consultation" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Service">
@@ -230,7 +232,9 @@
           <NavigationProperty Name="Users" Relationship="LawOfficeBaseModel.FK_User_UserRole" FromRole="UserRole" ToRole="User" />
         </EntityType>
         <Association Name="FK_Consultation_Service">
-          <End Type="LawOfficeBaseModel.Service" Role="Service" Multiplicity="1" />
+          <End Type="LawOfficeBaseModel.Service" Role="Service" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="LawOfficeBaseModel.Consultation" Role="Consultation" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Service">

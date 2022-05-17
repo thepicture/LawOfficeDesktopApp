@@ -1,8 +1,8 @@
 ﻿<Page x:Class="LawOfficeDesktopApp.Views.Controls.PriceView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:LawOfficeDesktopApp.Views.Controls"
       xmlns:viewmodels="clr-namespace:LawOfficeDesktopApp.ViewModels"
       d:DataContext="{d:DesignInstance Type=viewmodels:PriceViewModel}"
@@ -20,9 +20,12 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
-        <controls:Header HeaderText="Прайс" BorderWidth="0"/>
+        <controls:Header HeaderText="Прайс"
+                         BorderWidth="0" />
         <DataGrid ItemsSource="{Binding Prices}"
+                  SelectedItem="{Binding SelectedService}"
                   AutoGenerateColumns="False"
                   IsReadOnly="True"
                   ColumnWidth="*"
@@ -34,5 +37,24 @@
                                     Binding="{Binding PriceAsString}" />
             </DataGrid.Columns>
         </DataGrid>
+        <UniformGrid Columns="3"
+                     Grid.Row="2">
+            <UniformGrid.Visibility>
+                <Binding Path="IsAdmin">
+                    <Binding.Converter>
+                        <BooleanToVisibilityConverter />
+                    </Binding.Converter>
+                </Binding>
+            </UniformGrid.Visibility>
+            <Button Command="{Binding AddServiceCommand}"
+                    Content="Добавить"
+                    Margin="15" />
+            <Button Command="{Binding ChangeServiceCommand}"
+                    Content="Изменить"
+                    Margin="15" />
+            <Button Command="{Binding DeleteServiceCommand}"
+                    Content="Удалить"
+                    Margin="15" />
+        </UniformGrid>
     </Grid>
 </Page>

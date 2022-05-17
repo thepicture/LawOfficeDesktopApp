@@ -237,6 +237,7 @@
     <Compile Include="ViewModels\AddConsultationViewModel.cs" />
     <Compile Include="ViewModels\AddCustomerViewModel.cs" />
     <Compile Include="ViewModels\AddEditEmployeeViewModel.cs" />
+    <Compile Include="ViewModels\AddEditServiceViewModel.cs" />
     <Compile Include="ViewModels\AddRequestViewModel.cs" />
     <Compile Include="ViewModels\ContactsViewModel.cs" />
     <Compile Include="ViewModels\CustomerControlPanelViewModel.cs" />
@@ -257,6 +258,9 @@
     </Compile>
     <Compile Include="Views\Controls\AddEditEmployeeView.xaml.cs">
       <DependentUpon>AddEditEmployeeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\AddEditServiceView.xaml.cs">
+      <DependentUpon>AddEditServiceView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Controls\AddRequestView.xaml.cs">
       <DependentUpon>AddRequestView.xaml</DependentUpon>
@@ -325,6 +329,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Controls\AddEditEmployeeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\AddEditServiceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
