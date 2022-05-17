@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Linq;
 
 namespace LawOfficeDesktopApp.Models.Entities
 {
@@ -11,8 +12,14 @@ namespace LawOfficeDesktopApp.Models.Entities
             {
                 return !string.IsNullOrWhiteSpace(Login)
                        && !string.IsNullOrWhiteSpace(PhoneNumber)
-                       && PhoneNumber.Length == 11
-                       && !string.IsNullOrWhiteSpace(PlainPassword);
+                       && PhoneNumber.Length == 18
+                       && !string.IsNullOrWhiteSpace(PlainPassword)
+                       && PhoneNumber
+                            .ToCharArray()
+                            .Count(c =>
+                            {
+                                return char.IsDigit(c);
+                            }) == 11;
             }
         }
         public string this[string columnName]
@@ -23,7 +30,11 @@ namespace LawOfficeDesktopApp.Models.Entities
                 if (columnName == nameof(Login))
                     if (string.IsNullOrWhiteSpace(Login))
                         currentError = "Введите логин";
-                if (columnName == nameof(PhoneNumber) && (string.IsNullOrWhiteSpace(PhoneNumber) || PhoneNumber.Length != 11))
+                if (columnName == nameof(PhoneNumber) && (string.IsNullOrWhiteSpace(PhoneNumber)
+                                                          || PhoneNumber.Length != 18
+                                                          || PhoneNumber
+                                                                .ToCharArray()
+                                                                .Count(c => char.IsDigit(c)) != 11))
                     currentError = "Введите номер телефона";
                 if (columnName == nameof(PlainPassword) && string.IsNullOrWhiteSpace(PlainPassword))
                     currentError = "Введите пароль";
@@ -32,25 +43,5 @@ namespace LawOfficeDesktopApp.Models.Entities
         }
 
         public string Error => throw new System.NotImplementedException();
-
-        private string maskedPhoneNumber;
-
-        public string MaskedPhoneNumber
-        {
-            get => maskedPhoneNumber; set
-            {
-                maskedPhoneNumber = value;
-                if (value != null)
-                {
-                    PhoneNumber = value
-                        .Replace("+", "")
-                        .Replace("(", "")
-                        .Replace(")", "")
-                        .Replace("-", "")
-                        .Replace(" ", "")
-                        .Replace("_", "");
-                }
-            }
-        }
     }
 }

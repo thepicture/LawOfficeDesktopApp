@@ -63,5 +63,23 @@ namespace LawOfficeDesktopApp.ViewModels
         {
             Navigator.Go<AddRequestViewModel>();
         }
+
+        private ActionCommand goToMyAccountViewModel;
+
+        public ICommand GoToMyAccountViewModel
+        {
+            get
+            {
+                if (goToMyAccountViewModel == null)
+                    goToMyAccountViewModel = new ActionCommand(PerformGoToMyAccountViewModel);
+
+                return goToMyAccountViewModel;
+            }
+        }
+
+        private void PerformGoToMyAccountViewModel()
+        {
+            Navigator.Go<MyAccountViewModel>();
+        }
     }
 }

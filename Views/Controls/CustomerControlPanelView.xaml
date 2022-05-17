@@ -36,7 +36,8 @@
                                     IconKind="Email" />
             <controls:ClickableItem ItemText="Наши контакты"
                                     IconKind="Phone" />
-            <controls:ClickableItem ItemText="Личный кабинет"
+            <controls:ClickableItem ItemCommand="{Binding GoToMyAccountViewModel}"
+                                    ItemText="Личный кабинет"
                                     IconKind="Account" />
         </UniformGrid>
     </Grid>

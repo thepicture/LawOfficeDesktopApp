@@ -24,7 +24,7 @@
                 <RowDefinition Height="auto" />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <controls:Header HeaderText="Наши работники"/>
+            <controls:Header HeaderText="Наши работники" BorderWidth="0"/>
             <DataGrid ItemsSource="{Binding OurEmployees}"
                       AutoGenerateColumns="False"
                       IsReadOnly="True"

@@ -11,7 +11,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CustomerId" Type="int" Nullable="false" />
-          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="11" Nullable="false" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="18" Nullable="false" />
           <Property Name="QuestionText" Type="nvarchar" MaxLength="2048" Nullable="false" />
         </EntityType>
         <EntityType Name="Service">
@@ -29,7 +29,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="11" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="18" />
           <Property Name="PlainPassword" Type="nvarchar" MaxLength="100" />
           <Property Name="RoleId" Type="int" Nullable="false" />
           <Property Name="LastName" Type="nvarchar" MaxLength="50" />
@@ -105,7 +105,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CustomerId" Type="Int32" Nullable="false" />
-          <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="18" FixedLength="false" Unicode="true" />
           <Property Name="QuestionText" Type="String" Nullable="false" MaxLength="2048" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="User" Relationship="LawOfficeBaseModel.FK_CustomerRequest_User" FromRole="CustomerRequest" ToRole="User" />
         </EntityType>
@@ -124,7 +124,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Login" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumber" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="18" FixedLength="false" Unicode="true" />
           <Property Name="PlainPassword" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="RoleId" Type="Int32" Nullable="false" />
           <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -165,7 +165,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>

@@ -41,7 +41,6 @@ namespace LawOfficeDesktopApp.Controls
                                         new FrameworkPropertyMetadata(default(string),
                                                                       FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
-
         public bool IsPasswordVisible
         {
             get { return (bool)GetValue(IsPasswordVisibleProperty); }
@@ -89,6 +88,21 @@ namespace LawOfficeDesktopApp.Controls
         #endregion
 
 
+        public string InitialPasswordValue
+        {
+            get { return (string)GetValue(InitialPasswordValueProperty); }
+            set { SetValue(InitialPasswordValueProperty, value); }
+        }
+
+        public static readonly DependencyProperty InitialPasswordValueProperty =
+            DependencyProperty.Register("InitialPasswordValue",
+                                        typeof(string),
+                                        typeof(ExtendedPasswordBox),
+                                        new PropertyMetadata(default(string)));
+
+
+
+
 
         public ExtendedPasswordBox()
         {
@@ -118,8 +132,8 @@ namespace LawOfficeDesktopApp.Controls
             for (int i = 0; i < 2; i++)
             {
                 IsPasswordVisible = !IsPasswordVisible;
-                IsPasswordVisible = !IsPasswordVisible;
             }
+            PBoxHidden.Password = InitialPasswordValue;
         }
     }
 }

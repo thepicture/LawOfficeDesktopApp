@@ -1,8 +1,8 @@
 ﻿using LawOfficeDesktopApp.Models.Entities;
+using Microsoft.Toolkit.Mvvm.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace LawOfficeDesktopApp.Services
@@ -27,14 +27,44 @@ namespace LawOfficeDesktopApp.Services
             }
         }
 
-        public Task<User> GetSingleAsync(object id)
+        public async Task<User> GetSingleAsync(object id)
         {
-            throw new NotImplementedException();
+            using (LawOfficeBaseEntities entities = new LawOfficeBaseEntities())
+            {
+                return await entities.Users
+                    .FirstAsync(u =>
+                        u.Id.ToString() == id.ToString());
+            }
         }
 
-        public Task<bool> UpdateAsync(User item)
+        public async Task<bool> UpdateAsync(User item)
         {
-            throw new NotImplementedException();
+            return await Task.Run(() =>
+            {
+                using (LawOfficeBaseEntities entities = new LawOfficeBaseEntities())
+                {
+                    try
+                    {
+                        entities
+                            .Entry(
+                                entities.Users.Find(item.Id)).CurrentValues
+                            .SetValues(item);
+                        entities.SaveChanges();
+                        App.CurrentUser = item;
+                        Ioc.Default
+                            .GetService<INotificationService>()
+                            .NotifyAsync("Данные изменены");
+                        return true;
+                    }
+                    catch (Exception ex)
+                    {
+                        Ioc.Default
+                            .GetService<INotificationService>()
+                            .NotifyErrorAsync(ex);
+                        return false;
+                    }
+                }
+            });
         }
     }
 }

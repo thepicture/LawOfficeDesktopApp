@@ -1,0 +1,60 @@
+﻿<Page x:Class="LawOfficeDesktopApp.Views.Controls.MyAccountView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:LawOfficeDesktopApp.Views.Controls"
+      mc:Ignorable="d"
+      d:DesignHeight="450"
+      d:DesignWidth="800"
+      Title="MyAccountView"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:controls="clr-namespace:LawOfficeDesktopApp.Controls"
+      xmlns:viewmodels="clr-namespace:LawOfficeDesktopApp.ViewModels"
+      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+      d:DataContext="{d:DesignInstance Type=viewmodels:MyAccountViewModel}"
+      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+      TextElement.FontWeight="Regular"
+      TextElement.FontSize="13"
+      TextOptions.TextFormattingMode="Ideal"
+      TextOptions.TextRenderingMode="Auto"
+      Background="{DynamicResource MaterialDesignPaper}"
+      FontFamily="{DynamicResource MaterialDesignFont}">
+    <StackPanel VerticalAlignment="Center"
+                Margin="200,0">
+        <controls:Header HeaderText="Личный кабинет"
+                         BorderWidth="0" />
+        <TextBox Text="{Binding User.Login, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                 materialDesign:HintAssist.Hint="Логин"
+                 Style="{StaticResource MaterialDesignFilledTextBox}"
+                 Margin="0,5" />
+        <controls:ExtendedPasswordBox x:Name="PasswordBox"
+                                      BindablePassword="{Binding User.PlainPassword, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                                      InitialPasswordValue="123"
+                                      IsCanShowPassword="False">
+            <controls:ExtendedPasswordBox.Resources>
+                <Style TargetType="TextBox"
+                       BasedOn="{StaticResource MaterialDesignFilledTextBox}">
+                    <Setter Property="Margin"
+                            Value="0,5" />
+                    <Setter Property="materialDesign:HintAssist.Hint"
+                            Value="" />
+                </Style>
+                <Style TargetType="PasswordBox"
+                       BasedOn="{StaticResource MaterialDesignFilledPasswordBox}">
+                    <Setter Property="Margin"
+                            Value="0,5" />
+                </Style>
+            </controls:ExtendedPasswordBox.Resources>
+        </controls:ExtendedPasswordBox>
+        <xctk:MaskedTextBox Text="{Binding User.PhoneNumber, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                            Mask="+7 (###) ###-##-##"
+                            materialDesign:HintAssist.Hint="Номер телефона"
+                            Style="{StaticResource MaterialDesignFilledTextBox}"
+                            Margin="0,5" />
+        <Button Content="Изменить данные"
+                Margin="0,20,0,0"
+                Command="{Binding ChangeMyAccount}"
+                IsEnabled="{Binding User.IsValid}" />
+    </StackPanel>
+</Page>

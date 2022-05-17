@@ -12,6 +12,7 @@
       Title="AddRequestView"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+      xmlns:controls="clr-namespace:LawOfficeDesktopApp.Controls"
       TextElement.Foreground="{DynamicResource MaterialDesignBody}"
       TextElement.FontWeight="Regular"
       TextElement.FontSize="13"
@@ -21,19 +22,22 @@
       FontFamily="{DynamicResource MaterialDesignFont}">
     <Grid Margin="10">
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
             <RowDefinition Height="3*" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
+        <controls:Header HeaderText="Оставить заявку" BorderWidth="0"/>
         <TextBox Text="{Binding Request.QuestionText, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                  materialDesign:HintAssist.Hint="Ваш Вопрос" 
-                 TextWrapping="Wrap"/>
-        <xctk:MaskedTextBox Text="{Binding Request.MaskedPhoneNumber, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                 TextWrapping="Wrap"
+                 Grid.Row="1"/>
+        <xctk:MaskedTextBox Text="{Binding Request.PhoneNumber, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                             Mask="+7 (###) ###-##-##"
                             materialDesign:HintAssist.Hint="Номер телефона" 
-                            Grid.Row="1"/>
+                            Grid.Row="2"/>
         <Button Content="Отправить заявку" Command="{Binding AddRequest}"
                 IsEnabled="{Binding Request.IsValid}"
-                Grid.Row="2"/>
+                Grid.Row="3"/>
     </Grid>
 </Page>

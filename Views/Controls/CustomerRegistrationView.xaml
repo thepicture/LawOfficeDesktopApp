@@ -30,7 +30,7 @@
                Margin="0,50,0,5" />
         <TextBox Text="{Binding User.Login, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                  materialDesign:HintAssist.Hint="Логин" />
-        <xctk:MaskedTextBox Text="{Binding User.MaskedPhoneNumber, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+        <xctk:MaskedTextBox Text="{Binding User.PhoneNumber, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                             Mask="+7 (###) ###-##-##"
                             materialDesign:HintAssist.Hint="Номер телефона" />
         <controls:ExtendedPasswordBox BindablePassword="{Binding User.PlainPassword, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"

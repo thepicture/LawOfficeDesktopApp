@@ -20,4 +20,7 @@
     <DataTemplate DataType="{x:Type viewmodels:AddRequestViewModel}">
         <controls:AddRequestView />
     </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:MyAccountViewModel}">
+        <controls:MyAccountView />
+    </DataTemplate>
 </ResourceDictionary>

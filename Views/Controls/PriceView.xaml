@@ -21,7 +21,7 @@
             <RowDefinition Height="auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <controls:Header HeaderText="Прайс" />
+        <controls:Header HeaderText="Прайс" BorderWidth="0"/>
         <DataGrid ItemsSource="{Binding Prices}"
                   AutoGenerateColumns="False"
                   IsReadOnly="True"

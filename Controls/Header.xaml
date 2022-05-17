@@ -7,10 +7,10 @@
              mc:Ignorable="d"
              Name="Control">
     <Border BorderBrush="Black"
-            BorderThickness="1">
+            BorderThickness="{Binding ElementName=Control, Path=BorderWidth}">
         <TextBlock Text="{Binding ElementName=Control, Path=HeaderText}"
                    Style="{StaticResource MaterialDesignHeadline3TextBlock}"
                    TextAlignment="Center"
-                   Margin="10"/>
+                   Margin="10" />
     </Border>
 </UserControl>

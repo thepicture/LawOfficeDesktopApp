@@ -27,6 +27,7 @@ namespace LawOfficeDesktopApp.Services
                     User user = new User
                     {
                         Login = item.Login,
+                        PhoneNumber = item.PhoneNumber,
                         RoleId = 1,
                         PlainPassword = item.PlainPassword,
                     };

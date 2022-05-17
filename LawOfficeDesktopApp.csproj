@@ -230,6 +230,7 @@
     <Compile Include="ViewModels\AddRequestViewModel.cs" />
     <Compile Include="ViewModels\CustomerControlPanelViewModel.cs" />
     <Compile Include="ViewModels\CustomerLoginViewModel.cs" />
+    <Compile Include="ViewModels\MyAccountViewModel.cs" />
     <Compile Include="ViewModels\NavigatorViewModel.cs" />
     <Compile Include="ViewModels\CustomerRegistrationViewModel.cs" />
     <Compile Include="ViewModels\OurEmployeesViewModel.cs" />
@@ -246,6 +247,9 @@
     </Compile>
     <Compile Include="Views\Controls\CustomerRegistrationView.xaml.cs">
       <DependentUpon>CustomerRegistrationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\MyAccountView.xaml.cs">
+      <DependentUpon>MyAccountView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Controls\OurEmployeesView.xaml.cs">
       <DependentUpon>OurEmployeesView.xaml</DependentUpon>
@@ -294,6 +298,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Controls\CustomerRegistrationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\MyAccountView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
