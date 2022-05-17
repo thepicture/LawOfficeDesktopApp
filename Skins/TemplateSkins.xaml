@@ -30,6 +30,12 @@
         <controls:EmployeeLoginView />
     </DataTemplate>
     <DataTemplate DataType="{x:Type viewmodels:EmployeeControlPanelViewModel}">
-        <controls:EmployeeControlPanelView/>
+        <controls:EmployeeControlPanelView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:AddCustomerViewModel}">
+        <controls:AddCustomerView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:AddConsultationViewModel}">
+        <controls:AddConsultationView />
     </DataTemplate>
 </ResourceDictionary>

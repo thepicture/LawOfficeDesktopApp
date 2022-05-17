@@ -74,7 +74,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Consultation_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Consultation" Type="Self.Consultation" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
@@ -86,7 +88,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CustomerRequest_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="CustomerRequest" Type="Self.CustomerRequest" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
@@ -238,7 +242,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Consultation_User">
-          <End Type="LawOfficeBaseModel.User" Role="User" Multiplicity="1" />
+          <End Type="LawOfficeBaseModel.User" Role="User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="LawOfficeBaseModel.Consultation" Role="Consultation" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
@@ -250,7 +256,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CustomerRequest_User">
-          <End Type="LawOfficeBaseModel.User" Role="User" Multiplicity="1" />
+          <End Type="LawOfficeBaseModel.User" Role="User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="LawOfficeBaseModel.CustomerRequest" Role="CustomerRequest" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">

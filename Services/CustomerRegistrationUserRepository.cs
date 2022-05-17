@@ -35,9 +35,19 @@ namespace LawOfficeDesktopApp.Services
                     try
                     {
                         entities.SaveChanges();
-                        Ioc.Default
-                            .GetService<INotificationService>()
-                            .NotifyAsync("Вы зарегистрированы");
+                        if (App.IsAddingCustomer)
+                        {
+                            Ioc.Default
+                                .GetService<INotificationService>()
+                                .NotifyAsync("Клиент добавлен");
+                        }
+                        else
+                        {
+
+                            Ioc.Default
+                                .GetService<INotificationService>()
+                                .NotifyAsync("Вы зарегистрированы");
+                        }
                         return true;
                     }
                     catch (Exception ex)

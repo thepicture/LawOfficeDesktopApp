@@ -9,6 +9,9 @@ namespace LawOfficeDesktopApp.ViewModels
     [PropertyChanged.AddINotifyPropertyChangedInterface]
     public abstract class ViewModelBase : ObservableObject
     {
+        public INotificationService NotificationService => 
+            Ioc.Default.GetService<INotificationService>();
+        public bool IsAdmin => App.CurrentUser?.RoleId == 3;
         public string Title { get; set; }
         public bool IsRefreshing { get; set; }
         public INavigator<ViewModelBase> Navigator =>

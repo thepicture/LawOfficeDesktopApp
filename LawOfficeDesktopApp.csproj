@@ -215,6 +215,7 @@
     <Compile Include="Models\Entities\UserRole.cs">
       <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Partial\PartialConsultation.cs" />
     <Compile Include="Models\Partial\PartialCustomerRequest.cs" />
     <Compile Include="Models\Partial\PartialEmployee.cs" />
     <Compile Include="Models\Partial\PartialService.cs" />
@@ -233,6 +234,8 @@
     <Compile Include="Services\CustomerRegistrationUserRepository.cs" />
     <Compile Include="Services\ServiceRepository.cs" />
     <Compile Include="Services\UserRepository.cs" />
+    <Compile Include="ViewModels\AddConsultationViewModel.cs" />
+    <Compile Include="ViewModels\AddCustomerViewModel.cs" />
     <Compile Include="ViewModels\AddRequestViewModel.cs" />
     <Compile Include="ViewModels\ContactsViewModel.cs" />
     <Compile Include="ViewModels\CustomerControlPanelViewModel.cs" />
@@ -245,6 +248,12 @@
     <Compile Include="ViewModels\OurEmployeesViewModel.cs" />
     <Compile Include="ViewModels\PriceViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="Views\Controls\AddConsultationView.xaml.cs">
+      <DependentUpon>AddConsultationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\AddCustomerView.xaml.cs">
+      <DependentUpon>AddCustomerView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Controls\AddRequestView.xaml.cs">
       <DependentUpon>AddRequestView.xaml</DependentUpon>
     </Compile>
@@ -303,6 +312,14 @@
       <DependentUpon>NavigatorView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\Controls\AddConsultationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\AddCustomerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Controls\AddRequestView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

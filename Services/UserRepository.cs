@@ -3,6 +3,7 @@ using Microsoft.Toolkit.Mvvm.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace LawOfficeDesktopApp.Services
@@ -14,9 +15,35 @@ namespace LawOfficeDesktopApp.Services
             throw new NotImplementedException();
         }
 
-        public Task<bool> DeleteAsync(object id)
+        public async Task<bool> DeleteAsync(object id)
         {
-            throw new NotImplementedException();
+            return await Task.Run(() =>
+            {
+                using (LawOfficeBaseEntities entities = new LawOfficeBaseEntities())
+                {
+                    try
+                    {
+                        string idAsString = id.ToString();
+                        User user = entities.Users
+                            .First(u =>
+                                u.Id.ToString()
+                                == idAsString);
+                        entities.Users.Remove(user);
+                        entities.SaveChanges();
+                        Ioc.Default
+                            .GetService<INotificationService>()
+                            .NotifyAsync("Клиент удалён");
+                        return true;
+                    }
+                    catch (Exception ex)
+                    {
+                        Ioc.Default
+                            .GetService<INotificationService>()
+                            .NotifyErrorAsync(ex);
+                        return false;
+                    }
+                }
+            });
         }
 
         public async Task<IEnumerable<User>> GetAllAsync()

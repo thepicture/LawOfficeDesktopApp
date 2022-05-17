@@ -21,7 +21,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         <controls:Header HeaderText="Адвокатское Бюро" />
@@ -102,9 +102,10 @@
                      Height="400">
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center">
-            <controls:ClickableItem IconKind="UserBoxOutline" 
-                                    IsHitTestVisible="False"/>
+                <controls:ClickableItem IconKind="UserBoxOutline"
+                                        IsHitTestVisible="False" />
                 <TextBlock Text="Список клиентов"
+                           Margin="0,50,0,0"
                            IsHitTestVisible="False"
                            Grid.Row="1"
                            FontWeight="Medium"
@@ -114,8 +115,9 @@
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center">
                 <controls:ClickableItem IconKind="EmailOutline"
-                                    IsHitTestVisible="False"/>
+                                        IsHitTestVisible="False" />
                 <TextBlock Text="Заявки"
+                           Margin="0,50,0,0"
                            IsHitTestVisible="False"
                            Grid.Row="1"
                            FontWeight="Medium"
@@ -123,6 +125,7 @@
                            TextAlignment="Center" />
             </StackPanel>
             <DataGrid ItemsSource="{Binding Customers}"
+                      SelectedItem="{Binding SelectedCustomer}"
                       ColumnWidth="*"
                       IsReadOnly="True"
                       AutoGenerateColumns="False"
@@ -135,6 +138,7 @@
                 </DataGrid.Columns>
             </DataGrid>
             <DataGrid ItemsSource="{Binding Consultations}"
+                      SelectedItem="{Binding SelectedConsultation}"
                       ColumnWidth="*"
                       IsReadOnly="True"
                       AutoGenerateColumns="False"
@@ -148,6 +152,32 @@
                                         Binding="{Binding User.PhoneNumber}" />
                 </DataGrid.Columns>
             </DataGrid>
+        </UniformGrid>
+        <UniformGrid Columns="2"
+                     Grid.Row="3">
+            <UniformGrid.Visibility>
+                <Binding Path="IsAdmin">
+                    <Binding.Converter>
+                        <BooleanToVisibilityConverter />
+                    </Binding.Converter>
+                </Binding>
+            </UniformGrid.Visibility>
+            <UniformGrid Columns="2">
+                <Button Command="{Binding GoToAddCustomerViewModel}"
+                        Content="Новая запись"
+                        Margin="15" />
+                <Button Command="{Binding DeleteCustomerCommand}"
+                        Content="Удалить запись"
+                        Margin="15" />
+            </UniformGrid>
+            <UniformGrid Columns="2">
+                <Button Command="{Binding GoToAddConsultationViewModel}"
+                        Content="Новая запись"
+                        Margin="15" />
+                <Button Command="{Binding DeleteConsultationCommand}"
+                        Content="Удалить запись"
+                        Margin="15" />
+            </UniformGrid>
         </UniformGrid>
     </Grid>
 </UserControl>

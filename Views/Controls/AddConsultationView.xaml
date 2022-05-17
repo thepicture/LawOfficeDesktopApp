@@ -1,0 +1,42 @@
+﻿<Page x:Class="LawOfficeDesktopApp.Views.Controls.AddConsultationView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:LawOfficeDesktopApp.Views.Controls"
+      mc:Ignorable="d"
+      Title="AddConsultationView"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+      xmlns:controls="clr-namespace:LawOfficeDesktopApp.Controls"
+      xmlns:viewmodels="clr-namespace:LawOfficeDesktopApp.ViewModels"
+      d:DataContext="{d:DesignInstance Type=viewmodels:AddConsultationViewModel}"
+      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+      TextElement.FontWeight="Regular"
+      TextElement.FontSize="13"
+      TextOptions.TextFormattingMode="Ideal"
+      TextOptions.TextRenderingMode="Auto"
+      Background="{DynamicResource MaterialDesignPaper}"
+      FontFamily="{DynamicResource MaterialDesignFont}">
+    <StackPanel VerticalAlignment="Center"
+                Margin="200,0">
+        <controls:Header HeaderText="Записать на консультацию"
+                         BorderWidth="0" />
+        <ComboBox ItemsSource="{Binding Services}"
+                  SelectedItem="{Binding Consultation.Service, ValidatesOnDataErrors=True}"
+                  DisplayMemberPath="Title"
+                  materialDesign:HintAssist.Hint="Услуга"
+                  Style="{StaticResource MaterialDesignFilledComboBox}"
+                  Margin="0,5" />
+        <ComboBox ItemsSource="{Binding Customers}"
+                  SelectedItem="{Binding Consultation.User, ValidatesOnDataErrors=True}"
+                  DisplayMemberPath="Login"
+                  materialDesign:HintAssist.Hint="Клиент"
+                  Style="{StaticResource MaterialDesignFilledComboBox}"
+                  Margin="0,5" />
+        <Button Content="Записать клиента"
+                Margin="0,20,0,0"
+                Command="{Binding SaveConsultation}"
+                IsEnabled="{Binding Consultation.IsValid}" />
+    </StackPanel>
+</Page>
