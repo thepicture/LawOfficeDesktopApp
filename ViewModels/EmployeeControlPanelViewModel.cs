@@ -2,8 +2,8 @@
 using LawOfficeDesktopApp.Services;
 using Microsoft.Toolkit.Mvvm.DependencyInjection;
 using Microsoft.Toolkit.Mvvm.Input;
-using Microsoft.Toolkit.Mvvm.Messaging;
 using Microsoft.Xaml.Behaviors.Core;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -54,6 +54,22 @@ namespace LawOfficeDesktopApp.ViewModels
             IEnumerable<Consultation> currentConsulations = await Ioc.Default
                 .GetService<IRepository<Consultation>>()
                 .GetAllAsync();
+            if (!string.IsNullOrWhiteSpace(ConsultationSearchText))
+            {
+                currentConsulations = currentConsulations.Where(c =>
+                {
+                    string rawPhoneNumber = string.Join("",
+                                                        c.User.PhoneNumber.Where(p =>
+                                                        {
+                                                            return char.IsDigit(p);
+                                                        }));
+                    return rawPhoneNumber.Contains(ConsultationSearchText)
+                           || c.User.Login.IndexOf(ConsultationSearchText,
+                                                   StringComparison.OrdinalIgnoreCase) != -1
+                           || c.Service.Title.IndexOf(ConsultationSearchText,
+                                                      StringComparison.OrdinalIgnoreCase) != -1;
+                });
+            }
             Consultations = new ObservableCollection<Consultation>(currentConsulations);
         }
 
@@ -63,6 +79,20 @@ namespace LawOfficeDesktopApp.ViewModels
                 .GetService<IRepository<User>>()
                 .GetAllAsync();
             currentCustomers = currentCustomers.Where(u => u.RoleId == 1);
+            if (!string.IsNullOrWhiteSpace(CustomerSearchText))
+            {
+                currentCustomers = currentCustomers.Where(c =>
+                    {
+                        string rawPhoneNumber = string.Join("",
+                                                            c.PhoneNumber.Where(p =>
+                                                            {
+                                                                return char.IsDigit(p);
+                                                            }));
+                        return rawPhoneNumber.Contains(CustomerSearchText)
+                               || c.Login.IndexOf(CustomerSearchText,
+                                                  StringComparison.OrdinalIgnoreCase) != -1;
+                    });
+            }
             Customers = new ObservableCollection<User>(currentCustomers);
         }
 
@@ -71,7 +101,8 @@ namespace LawOfficeDesktopApp.ViewModels
             get
             {
                 if (goToOurEmployeesViewModel == null)
-                    goToOurEmployeesViewModel = new ActionCommand(PerformGoToOurEmployeesViewModel);
+                    goToOurEmployeesViewModel =
+                        new ActionCommand(PerformGoToOurEmployeesViewModel);
 
                 return goToOurEmployeesViewModel;
             }
@@ -113,8 +144,9 @@ namespace LawOfficeDesktopApp.ViewModels
             get
             {
                 if (deleteCustomerCommand == null)
-                    deleteCustomerCommand = new RelayCommand(DeleteCustomerAsync,
-                                                             () => SelectedCustomer != null);
+                    deleteCustomerCommand =
+                        new RelayCommand(DeleteCustomerAsync,
+                                         () => SelectedCustomer != null);
 
                 return deleteCustomerCommand;
             }
@@ -167,7 +199,8 @@ namespace LawOfficeDesktopApp.ViewModels
             get
             {
                 if (goToAddCustomerViewModel == null)
-                    goToAddCustomerViewModel = new RelayCommand(PerformGoToAddCustomerViewModel);
+                    goToAddCustomerViewModel =
+                        new RelayCommand(PerformGoToAddCustomerViewModel);
 
                 return goToAddCustomerViewModel;
             }
@@ -185,7 +218,8 @@ namespace LawOfficeDesktopApp.ViewModels
             get
             {
                 if (goToAddConsultationViewModel == null)
-                    goToAddConsultationViewModel = new RelayCommand(PerformGoToAddConsultationViewModel);
+                    goToAddConsultationViewModel =
+                        new RelayCommand(PerformGoToAddConsultationViewModel);
 
                 return goToAddConsultationViewModel;
             }
@@ -194,6 +228,32 @@ namespace LawOfficeDesktopApp.ViewModels
         private void PerformGoToAddConsultationViewModel()
         {
             Navigator.Go<AddConsultationViewModel>();
+        }
+
+        private string customerSearchText;
+
+        public string CustomerSearchText
+        {
+            get => customerSearchText; set
+            {
+                if (SetProperty(ref customerSearchText, value))
+                {
+                    LoadCustomersAsync();
+                }
+            }
+        }
+
+        private string consultationSearchText;
+
+        public string ConsultationSearchText
+        {
+            get => consultationSearchText; set
+            {
+                if (SetProperty(ref consultationSearchText, value))
+                {
+                    LoadConsultationsAsync();
+                }
+            }
         }
     }
 }

@@ -19,26 +19,34 @@
       TextOptions.TextRenderingMode="Auto"
       Background="{DynamicResource MaterialDesignPaper}"
       FontFamily="{DynamicResource MaterialDesignFont}">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto" />
-                <RowDefinition />
-                <RowDefinition Height="auto" />
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
-            <controls:Header HeaderText="Наши работники" BorderWidth="0"/>
-            <DataGrid ItemsSource="{Binding OurEmployees}"
-                      SelectedItem="{Binding SelectedEmployee}"
-                      AutoGenerateColumns="False"
-                      IsReadOnly="True"
-                      ColumnWidth="*"
-                      Grid.Row="1">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}"/>
-                    <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}"/>
-                    <DataGridTextColumn Header="Опыт работы" Binding="{Binding ExperienceInYearsAsString}"/>
-                </DataGrid.Columns>
-            </DataGrid>
-        <StackPanel Grid.Row="2">
+        <controls:Header HeaderText="Наши работники"
+                         BorderWidth="0" />
+        <TextBox Text="{Binding FullNameSearchText, UpdateSourceTrigger=PropertyChanged}"
+                 materialDesign:HintAssist.Hint="Поиск по ФИО"
+                 Grid.Row="1" />
+        <DataGrid ItemsSource="{Binding OurEmployees}"
+                  SelectedItem="{Binding SelectedEmployee}"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  ColumnWidth="*"
+                  Grid.Row="2">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Фамилия"
+                                    Binding="{Binding LastName}" />
+                <DataGridTextColumn Header="Имя"
+                                    Binding="{Binding FirstName}" />
+                <DataGridTextColumn Header="Опыт работы"
+                                    Binding="{Binding ExperienceInYearsAsString}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Grid.Row="3">
             <StackPanel.Visibility>
                 <Binding Path="IsAdmin">
                     <Binding.Converter>
@@ -58,5 +66,5 @@
                     Content="Удалить"
                     Margin="15" />
         </StackPanel>
-        </Grid>
+    </Grid>
 </Page>

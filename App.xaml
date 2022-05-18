@@ -48,6 +48,23 @@
                 <Setter Property="Margin"
                         Value="5 5 5 20" />
             </Style>
+            <Style TargetType="DataGrid"
+                   BasedOn="{StaticResource MaterialDesignDataGrid}">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding HasItems, RelativeSource={RelativeSource Self}}"
+                                 Value="False">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <TextBlock Text="Ничего не найдено. Введите другое условие поиска"
+                                               TextAlignment="Center"
+                                               VerticalAlignment="Center" />
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

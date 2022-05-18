@@ -6,6 +6,7 @@ using Microsoft.Toolkit.Mvvm.Messaging;
 using Microsoft.Xaml.Behaviors.Core;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
 
 namespace LawOfficeDesktopApp.ViewModels
@@ -35,6 +36,23 @@ namespace LawOfficeDesktopApp.ViewModels
             IEnumerable<Service> prices = await Ioc.Default
              .GetService<IRepository<Service>>()
              .GetAllAsync();
+            if (decimal.TryParse(FromPriceSearchText, out decimal fromPrice))
+            {
+                if (decimal.TryParse(ToPriceSearchText, out decimal toPrice))
+                {
+                    prices = prices.Where(p =>
+                    {
+                        return p.MinimumOrBasePrice >= fromPrice
+                               && ((!p.MaximumPrice.HasValue
+                                   && p.MinimumOrBasePrice <= toPrice)
+                                   || p.MaximumPrice <= toPrice);
+                    });
+                }
+                else
+                {
+                    prices = prices.Where(p => p.MinimumOrBasePrice >= fromPrice);
+                }
+            }
             Prices = new ObservableCollection<Service>(prices);
         }
 
@@ -114,6 +132,34 @@ namespace LawOfficeDesktopApp.ViewModels
                 SetProperty(ref selectedService, value);
                 ChangeServiceCommand?.NotifyCanExecuteChanged();
                 DeleteServiceCommand?.NotifyCanExecuteChanged();
+            }
+        }
+
+        private string fromPriceSearchText;
+
+        public string FromPriceSearchText
+        {
+            get => fromPriceSearchText;
+            set
+            {
+                if (SetProperty(ref fromPriceSearchText, value))
+                {
+                    LoadPricesAsync();
+                }
+            }
+        }
+
+        private string toPriceSearchText;
+
+        public string ToPriceSearchText
+        {
+            get => toPriceSearchText;
+            set
+            {
+                if (SetProperty(ref toPriceSearchText, value))
+                {
+                    LoadPricesAsync();
+                }
             }
         }
     }

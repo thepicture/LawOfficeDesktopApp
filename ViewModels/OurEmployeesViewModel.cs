@@ -37,6 +37,14 @@ namespace LawOfficeDesktopApp.ViewModels
                 .GetService<IRepository<User>>()
                 .GetAllAsync();
             users = users.Where(u => u.RoleId == 2);
+            if (!string.IsNullOrWhiteSpace(FullNameSearchText))
+            {
+                users = users.Where(u =>
+                {
+                    return u.LastName.StartsWith(FullNameSearchText, System.StringComparison.OrdinalIgnoreCase)
+                           || u.FirstName.StartsWith(FullNameSearchText, System.StringComparison.OrdinalIgnoreCase);
+                });
+            }
             OurEmployees = new ObservableCollection<User>(users);
         }
 
@@ -115,6 +123,20 @@ namespace LawOfficeDesktopApp.ViewModels
                 SetProperty(ref selectedEmployee, value);
                 DeleteEmployeeCommand.NotifyCanExecuteChanged();
                 ChangeEmployeeCommand.NotifyCanExecuteChanged();
+            }
+        }
+
+        private string fullNameSearchText;
+
+        public string FullNameSearchText
+        {
+            get => fullNameSearchText;
+            set
+            {
+                if (SetProperty(ref fullNameSearchText, value))
+                {
+                    LoadOurEmployeesAsync();
+                }
             }
         }
     }
