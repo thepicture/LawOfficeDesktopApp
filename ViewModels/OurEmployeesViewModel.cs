@@ -18,8 +18,17 @@ namespace LawOfficeDesktopApp.ViewModels
             Title = "Наши работники";
             LoadOurEmployeesAsync();
             StrongReferenceMessenger.Default
-               .Register<string, string>(nameof(LoadOurEmployeesAsync),
+               .Register<string>(nameof(LoadOurEmployeesAsync),
                                          (_, __) => LoadOurEmployeesAsync());
+            Navigator.Navigated += () =>
+            {
+                if (!(Navigator.CurrentTarget is AddEditEmployeeViewModel
+                      || Navigator.CurrentTarget is OurEmployeesViewModel))
+                {
+                    StrongReferenceMessenger.Default
+                                   .Unregister<string>(nameof(LoadOurEmployeesAsync));
+                }
+            };
         }
 
         private async void LoadOurEmployeesAsync()

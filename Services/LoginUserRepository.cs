@@ -25,10 +25,19 @@ namespace LawOfficeDesktopApp.Services
                     {
                         if (currentUser.PlainPassword == item.PlainPassword)
                         {
-                            App.CurrentUser = currentUser;
-                            Ioc.Default
+                            if (currentUser.RoleId == 3)
+                            {
+                                Ioc.Default
                                 .GetService<INotificationService>()
-                                .NotifyAsync("Вы авторизованы");
+                                .NotifyAsync("Вы зашли через администратора!");
+                            }
+                            else
+                            {
+                                Ioc.Default
+                                    .GetService<INotificationService>()
+                                    .NotifyAsync("Вы авторизованы");
+                            }
+                            App.CurrentUser = currentUser;
                             return true;
                         }
                     }
