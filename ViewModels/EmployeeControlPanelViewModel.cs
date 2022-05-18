@@ -42,14 +42,11 @@ namespace LawOfficeDesktopApp.ViewModels
             Title = "Адвокатское бюро - "
                     + $"авторизован как {App.CurrentUser.LastName} "
                     + $"{App.CurrentUser.FirstName}";
-            LoadCustomersAsync();
-            LoadConsultationsAsync();
-            StrongReferenceMessenger.Default
-                .Register<string, string>(nameof(LoadCustomersAsync),
-                                          (_, __) => LoadCustomersAsync());
-            StrongReferenceMessenger.Default
-                .Register<string>(nameof(LoadConsultationsAsync),
-                                  (_, __) => LoadConsultationsAsync());
+            Navigator.Navigated += () =>
+            {
+                LoadCustomersAsync();
+                LoadConsultationsAsync();
+            };
         }
 
         private async void LoadConsultationsAsync()

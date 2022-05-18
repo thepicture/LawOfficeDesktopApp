@@ -12,7 +12,10 @@ namespace LawOfficeDesktopApp.ViewModels
         public AddCustomerViewModel()
         {
             Title = "Добавление клиента";
-            User = new CustomerRegistrationUser();
+            User = new CustomerRegistrationUser
+            {
+                RoleId = 1
+            };
         }
 
         private RelayCommand registerAsCustomer;
