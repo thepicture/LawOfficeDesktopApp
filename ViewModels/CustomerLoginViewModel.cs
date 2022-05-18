@@ -35,7 +35,17 @@ namespace LawOfficeDesktopApp.ViewModels
                     .GetService<IRepository<LoginUser>>()
                     .CreateAsync(User))
             {
-                Navigator.Go<CustomerControlPanelViewModel>();
+                if (App.CurrentUser.RoleId == 2)
+                {
+                    App.CurrentUser = null;
+                    await NotificationService
+                        .NotifyErrorAsync("Вы не можете зайти как клиент, "
+                                          + "так как вы не являетесь администратором");
+                }
+                else
+                {
+                    Navigator.Go<CustomerControlPanelViewModel>();
+                }
             }
         }
     }
