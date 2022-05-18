@@ -17,8 +17,17 @@ namespace LawOfficeDesktopApp.ViewModels
             Title = "Прайс";
             LoadPricesAsync();
             StrongReferenceMessenger.Default
-               .Register<string, string>(nameof(LoadPricesAsync),
+               .Register<string>(nameof(LoadPricesAsync),
                                          (_, __) => LoadPricesAsync());
+            Navigator.Navigated += () =>
+            {
+                if (!(Navigator.CurrentTarget is AddEditServiceViewModel
+                      || Navigator.CurrentTarget is PriceViewModel))
+                {
+                    StrongReferenceMessenger.Default
+                                   .Unregister<string>(nameof(LoadPricesAsync));
+                }
+            };
         }
 
         private async void LoadPricesAsync()
