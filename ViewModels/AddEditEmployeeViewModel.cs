@@ -35,7 +35,8 @@ namespace LawOfficeDesktopApp.ViewModels
                 LastName = inputEmployee.LastName,
                 FirstName = inputEmployee.FirstName,
                 ExperienceInYears = inputEmployee.ExperienceInYears,
-                RoleId = inputEmployee.RoleId
+                RoleId = inputEmployee.RoleId,
+                PlainPassword = inputEmployee.PlainPassword
             };
             Employee.PropertyChanged += (_, __) =>
             {

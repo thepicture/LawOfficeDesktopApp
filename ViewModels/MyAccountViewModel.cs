@@ -22,7 +22,6 @@ namespace LawOfficeDesktopApp.ViewModels
             User = await Ioc.Default
                 .GetService<IRepository<User>>()
                 .GetSingleAsync(App.CurrentUser.Id);
-            StrongReferenceMessenger.Default.Send(User.PlainPassword, "InitializePassword");
         }
 
         private ActionCommand changeMyAccount;

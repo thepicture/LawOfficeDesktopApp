@@ -43,7 +43,6 @@
                      Margin="0,5" />
             <controls:ExtendedPasswordBox x:Name="PasswordBox"
                                           BindablePassword="{Binding Employee.PlainPassword, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-                                          InitialPasswordValue="{Binding Employee.PlainPassword}"
                                           IsCanShowPassword="False">
                 <controls:ExtendedPasswordBox.Resources>
                     <Style TargetType="TextBox"

@@ -35,7 +35,10 @@ namespace LawOfficeDesktopApp.Models.Entities
                                                           || PhoneNumber.Length != 18
                                                           || PhoneNumber
                                                                 .ToCharArray()
-                                                                .Count(c => char.IsDigit(c)) != 11))
+                                                                .Count(c =>
+                                                                {
+                                                                    return char.IsDigit(c);
+                                                                }) != 11))
                     currentError = "Введите номер телефона";
                 if (columnName == nameof(PlainPassword) && string.IsNullOrWhiteSpace(PlainPassword))
                     currentError = "Введите пароль";

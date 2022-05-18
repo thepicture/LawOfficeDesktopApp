@@ -12,15 +12,6 @@ namespace LawOfficeDesktopApp.Views.Controls
         public MyAccountView()
         {
             InitializeComponent();
-            StrongReferenceMessenger.Default
-                .Register<MyAccountView, string, string>(this,
-                                                         nameof(InitializePassword),
-                                                         InitializePassword);
-        }
-
-        private void InitializePassword(object recipient, object message)
-        {
-          
         }
     }
 }

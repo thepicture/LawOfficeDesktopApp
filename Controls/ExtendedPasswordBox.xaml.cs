@@ -38,8 +38,20 @@ namespace LawOfficeDesktopApp.Controls
             DependencyProperty.Register("BindablePassword",
                                         typeof(string),
                                         typeof(ExtendedPasswordBox),
-                                        new FrameworkPropertyMetadata(default(string),
-                                                                      FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+                                        new FrameworkPropertyMetadata(null,
+                                                                      FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnPasswordChanged));
+
+        /// <summary>
+        /// Initializes the password for the first time.
+        /// </summary>
+        private static void OnPasswordChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (e.NewValue == null) return;
+            if (((ExtendedPasswordBox)d).PBoxHidden.Password == "" && ((ExtendedPasswordBox)d).PBoxVisible.Text == "")
+            {
+                ((ExtendedPasswordBox)d).PBoxHidden.Password = (string)e.NewValue;
+            }
+        }
 
         public bool IsPasswordVisible
         {
@@ -87,23 +99,6 @@ namespace LawOfficeDesktopApp.Controls
 
         #endregion
 
-
-        public string InitialPasswordValue
-        {
-            get { return (string)GetValue(InitialPasswordValueProperty); }
-            set { SetValue(InitialPasswordValueProperty, value); }
-        }
-
-        public static readonly DependencyProperty InitialPasswordValueProperty =
-            DependencyProperty.Register("InitialPasswordValue",
-                                        typeof(string),
-                                        typeof(ExtendedPasswordBox),
-                                        new PropertyMetadata(default(string)));
-
-
-
-
-
         public ExtendedPasswordBox()
         {
             InitializeComponent();
@@ -111,7 +106,7 @@ namespace LawOfficeDesktopApp.Controls
 
         private void OnPasswordChanged(object sender, RoutedEventArgs e)
         {
-            SetValue(BindablePasswordProperty, (sender as PasswordBox).Password);
+            SetValue(BindablePasswordProperty, PBoxHidden.Password);
         }
 
         private void OnChecked(object sender, RoutedEventArgs e)
@@ -133,7 +128,6 @@ namespace LawOfficeDesktopApp.Controls
             {
                 IsPasswordVisible = !IsPasswordVisible;
             }
-            PBoxHidden.Password = InitialPasswordValue;
         }
     }
 }
