@@ -19,7 +19,8 @@
       Background="{DynamicResource MaterialDesignPaper}"
       FontFamily="{DynamicResource MaterialDesignFont}">
     <StackPanel VerticalAlignment="Center"
-                Margin="200,0">
+                Margin="200,0"
+                FocusManager.FocusedElement="{Binding ElementName=LoginBox}">
         <TextBlock Text="Регистрация"
                    Style="{StaticResource MaterialDesignHeadline4TextBlock}"
                    FontWeight="Bold"
@@ -29,7 +30,8 @@
                Height="100"
                Margin="0,50,0,5" />
         <TextBox Text="{Binding User.Login, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-                 materialDesign:HintAssist.Hint="Логин" />
+                 materialDesign:HintAssist.Hint="Логин" 
+                 Name="LoginBox"/>
         <xctk:MaskedTextBox Text="{Binding User.PhoneNumber, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                             Mask="+7 (###) ###-##-##"
                             materialDesign:HintAssist.Hint="Номер телефона" />
@@ -37,7 +39,8 @@
                                       IsCanShowPassword="True" />
         <Button Content="Зарегистрироваться"
                 Command="{Binding RegisterAsCustomer}"
-                IsEnabled="{Binding User.IsValid}" />
+                IsEnabled="{Binding User.IsValid}" 
+                IsDefault="True"/>
         <Button Content="Уже зарегистрирован как персонал"
                 Command="{Binding GoToEmployeeLoginViewModel}"
                 Margin="0,50,0,0"

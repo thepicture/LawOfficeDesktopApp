@@ -17,7 +17,8 @@
       TextOptions.TextFormattingMode="Ideal"
       TextOptions.TextRenderingMode="Auto"
       Background="{DynamicResource MaterialDesignPaper}"
-      FontFamily="{DynamicResource MaterialDesignFont}">
+      FontFamily="{DynamicResource MaterialDesignFont}"
+      Loaded="OnLoaded">
     <StackPanel VerticalAlignment="Center"
                 Margin="200,0">
         <TextBlock Text="Авторизация"
@@ -29,11 +30,13 @@
                Height="100"
                Margin="0,50,0,5" />
         <TextBox Text="{Binding User.Login, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-                 materialDesign:HintAssist.Hint="Логин" />
+                 materialDesign:HintAssist.Hint="Логин"
+                 Name="LoginBox" />
         <controls:ExtendedPasswordBox BindablePassword="{Binding User.PlainPassword, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                                       IsCanShowPassword="True" />
         <Button Content="Войти"
                 Command="{Binding LoginAsCustomer}"
-                IsEnabled="{Binding User.IsValid}" />
+                IsEnabled="{Binding User.IsValid}"
+                IsDefault="True" />
     </StackPanel>
 </Page>
