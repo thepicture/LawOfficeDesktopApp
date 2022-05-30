@@ -153,7 +153,7 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
                 <TextBox Text="{Binding RequestSearchText, UpdateSourceTrigger=PropertyChanged}"
-                         materialDesign:HintAssist.Hint="Поиск консультации" />
+                         materialDesign:HintAssist.Hint="Поиск заявки" />
                 <DataGrid ItemsSource="{Binding Requests}"
                           SelectedItem="{Binding SelectedRequest}"
                           IsReadOnly="True"
