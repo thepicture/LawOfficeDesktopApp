@@ -8,10 +8,6 @@ namespace LawOfficeDesktopApp.Controls
     /// </summary>
     public partial class Header : UserControl
     {
-
-
-
-
         public int BorderWidth
         {
             get { return (int)GetValue(BorderWidthProperty); }

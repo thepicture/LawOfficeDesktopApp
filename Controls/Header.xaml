@@ -8,9 +8,11 @@
              Name="Control">
     <Border BorderBrush="Black"
             BorderThickness="{Binding ElementName=Control, Path=BorderWidth}">
-        <TextBlock Text="{Binding ElementName=Control, Path=HeaderText}"
-                   Style="{StaticResource MaterialDesignHeadline3TextBlock}"
-                   TextAlignment="Center"
-                   Margin="10" />
+        <Grid VerticalAlignment="Center">
+            <TextBlock Text="{Binding ElementName=Control, Path=HeaderText}"
+                       Style="{StaticResource MaterialDesignHeadline4TextBlock}"
+                       TextAlignment="Center"
+                       Margin="0,30,0,30" />
+        </Grid>
     </Border>
 </UserControl>

@@ -44,8 +44,8 @@
                 <TextBlock Text="Наш прайс"
                            IsHitTestVisible="False"
                            FontWeight="Medium"
-                           Style="{StaticResource MaterialDesignHeadline5TextBlock}"
-                           TextAlignment="Center" />
+                           Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                           TextAlignment="Center"/>
                 <Border BorderBrush="Purple"
                         BorderThickness="1"
                         Grid.Row="1"
@@ -77,7 +77,7 @@
                 <TextBlock Text="Наш персонал"
                            IsHitTestVisible="False"
                            FontWeight="Medium"
-                           Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                           Style="{StaticResource MaterialDesignHeadline6TextBlock}"
                            TextAlignment="Center" />
                 <Border BorderBrush="Purple"
                         Grid.Row="1"
