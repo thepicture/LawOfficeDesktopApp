@@ -17,7 +17,7 @@ namespace LawOfficeDesktopApp.Models.Entities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Service()
         {
-            this.Consultations = new HashSet<Consultation>();
+            this.CustomerRequests = new HashSet<CustomerRequest>();
         }
     
         public int Id { get; set; }
@@ -26,6 +26,6 @@ namespace LawOfficeDesktopApp.Models.Entities
         public Nullable<decimal> MaximumPrice { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Consultation> Consultations { get; set; }
+        public virtual ICollection<CustomerRequest> CustomerRequests { get; set; }
     }
 }

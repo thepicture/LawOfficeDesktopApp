@@ -45,7 +45,7 @@
                            IsHitTestVisible="False"
                            FontWeight="Medium"
                            Style="{StaticResource MaterialDesignHeadline6TextBlock}"
-                           TextAlignment="Center"/>
+                           TextAlignment="Center" />
                 <Border BorderBrush="Purple"
                         BorderThickness="1"
                         Grid.Row="1"
@@ -131,7 +131,7 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
                 <TextBox Text="{Binding CustomerSearchText, UpdateSourceTrigger=PropertyChanged}"
-                         materialDesign:HintAssist.Hint="Поиск клиента"/>
+                         materialDesign:HintAssist.Hint="Поиск клиента" />
                 <DataGrid ItemsSource="{Binding Customers}"
                           SelectedItem="{Binding SelectedCustomer}"
                           ColumnWidth="*"
@@ -152,22 +152,27 @@
                     <RowDefinition Height="auto" />
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                <TextBox Text="{Binding ConsultationSearchText, UpdateSourceTrigger=PropertyChanged}"
-                         materialDesign:HintAssist.Hint="Поиск консультации"/>
-                <DataGrid ItemsSource="{Binding Consultations}"
-                          SelectedItem="{Binding SelectedConsultation}"
-                          ColumnWidth="*"
+                <TextBox Text="{Binding RequestSearchText, UpdateSourceTrigger=PropertyChanged}"
+                         materialDesign:HintAssist.Hint="Поиск консультации" />
+                <DataGrid ItemsSource="{Binding Requests}"
+                          SelectedItem="{Binding SelectedRequest}"
                           IsReadOnly="True"
                           AutoGenerateColumns="False"
                           Margin="5"
                           Grid.Row="1">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Логин"
-                                            Binding="{Binding User.Login}" />
+                                            Binding="{Binding User.Login}" 
+                                            Width="auto"/>
                         <DataGridTextColumn Header="Услуга"
-                                            Binding="{Binding Service.Title}" />
+                                            Binding="{Binding Service.Title}" 
+                                            Width="auto"/>
                         <DataGridTextColumn Header="Номер телефона"
-                                            Binding="{Binding User.PhoneNumber}" />
+                                            Binding="{Binding PhoneNumber}" 
+                                            Width="auto"/>
+                        <DataGridTextColumn Header="Вопрос"
+                                            Width="*"
+                                            Binding="{Binding QuestionText, TargetNullValue=Не указан}" />
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
@@ -190,10 +195,10 @@
                         Margin="15" />
             </UniformGrid>
             <UniformGrid Columns="2">
-                <Button Command="{Binding GoToAddConsultationViewModel}"
+                <Button Command="{Binding GoToAddRequestViewModel}"
                         Content="Новая запись"
                         Margin="15" />
-                <Button Command="{Binding DeleteConsultationCommand}"
+                <Button Command="{Binding DeleteRequestCommand}"
                         Content="Удалить запись"
                         Margin="15" />
             </UniformGrid>

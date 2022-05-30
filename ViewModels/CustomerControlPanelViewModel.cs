@@ -61,7 +61,7 @@ namespace LawOfficeDesktopApp.ViewModels
 
         private void PerformGoToAddRequestViewModel()
         {
-            Navigator.Go<AddRequestViewModel>();
+            Navigator.Go<AddRequestAsCustomerViewModel>();
         }
 
         private ActionCommand goToMyAccountViewModel;

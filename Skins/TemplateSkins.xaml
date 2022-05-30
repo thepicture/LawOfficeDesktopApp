@@ -17,8 +17,11 @@
     <DataTemplate DataType="{x:Type viewmodels:PriceViewModel}">
         <controls:PriceView />
     </DataTemplate>
-    <DataTemplate DataType="{x:Type viewmodels:AddRequestViewModel}">
+    <DataTemplate DataType="{x:Type viewmodels:AddRequestAsCustomerViewModel}">
         <controls:AddRequestView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:AddRequestAsEmployeeViewModel}">
+        <controls:AddConsultationView />
     </DataTemplate>
     <DataTemplate DataType="{x:Type viewmodels:MyAccountViewModel}">
         <controls:MyAccountView />
@@ -34,9 +37,6 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type viewmodels:AddCustomerViewModel}">
         <controls:AddCustomerView />
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type viewmodels:AddConsultationViewModel}">
-        <controls:AddConsultationView />
     </DataTemplate>
     <DataTemplate DataType="{x:Type viewmodels:AddEditEmployeeViewModel}">
         <controls:AddEditEmployeeView />

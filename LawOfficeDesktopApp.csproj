@@ -197,9 +197,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BaseModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Entities\Consultation.cs">
-      <DependentUpon>BaseModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Entities\Contact.cs">
       <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
@@ -215,14 +212,12 @@
     <Compile Include="Models\Entities\UserRole.cs">
       <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Partial\PartialConsultation.cs" />
     <Compile Include="Models\Partial\PartialCustomerRequest.cs" />
     <Compile Include="Models\Partial\PartialEmployee.cs" />
     <Compile Include="Models\Partial\PartialService.cs" />
     <Compile Include="Models\Partial\PartialUser.cs" />
     <Compile Include="Models\UserModels\CustomerRegistrationUser.cs" />
     <Compile Include="Models\UserModels\LoginUser.cs" />
-    <Compile Include="Services\ConsultationRepository.cs" />
     <Compile Include="Services\ContactsRepository.cs" />
     <Compile Include="Services\LoginUserRepository.cs" />
     <Compile Include="Services\CustomerRequestRepository.cs" />
@@ -234,11 +229,11 @@
     <Compile Include="Services\CustomerRegistrationUserRepository.cs" />
     <Compile Include="Services\ServiceRepository.cs" />
     <Compile Include="Services\UserRepository.cs" />
-    <Compile Include="ViewModels\AddConsultationViewModel.cs" />
+    <Compile Include="ViewModels\AddRequestAsEmployeeViewModel.cs" />
     <Compile Include="ViewModels\AddCustomerViewModel.cs" />
     <Compile Include="ViewModels\AddEditEmployeeViewModel.cs" />
     <Compile Include="ViewModels\AddEditServiceViewModel.cs" />
-    <Compile Include="ViewModels\AddRequestViewModel.cs" />
+    <Compile Include="ViewModels\AddRequestAsCustomerViewModel.cs" />
     <Compile Include="ViewModels\ContactsViewModel.cs" />
     <Compile Include="ViewModels\CustomerControlPanelViewModel.cs" />
     <Compile Include="ViewModels\CustomerLoginViewModel.cs" />

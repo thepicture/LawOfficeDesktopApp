@@ -10,15 +10,23 @@ namespace LawOfficeDesktopApp.Models.Entities
         {
             get
             {
-                return !string.IsNullOrWhiteSpace(QuestionText)
-                       && !string.IsNullOrWhiteSpace(PhoneNumber)
+                if (User != null)
+                {
+                    return Service != null;
+                }
+                else
+                {
+                    return !string.IsNullOrWhiteSpace(PhoneNumber)
                        && PhoneNumber.Length == 18
                        && PhoneNumber
                             .ToCharArray()
                             .Count(c =>
                             {
                                 return char.IsDigit(c);
-                            }) == 11;
+                            }) == 11
+                       && Service != null
+                       && CustomerId > 0;
+                }
             }
         }
         public string this[string columnName]
@@ -26,9 +34,8 @@ namespace LawOfficeDesktopApp.Models.Entities
             get
             {
                 string currentError = null;
-                if (columnName == nameof(QuestionText))
-                    if (string.IsNullOrWhiteSpace(QuestionText))
-                        currentError = "Введите ваш вопрос";
+                if (columnName == nameof(Service) && Service == null)
+                    currentError = "Выберите услугу";
                 if (columnName == nameof(PhoneNumber) && (string.IsNullOrWhiteSpace(PhoneNumber)
                                                           || PhoneNumber.Length != 18 || PhoneNumber
                                                                 .ToCharArray()

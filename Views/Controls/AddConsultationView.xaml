@@ -10,7 +10,7 @@
       xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
       xmlns:controls="clr-namespace:LawOfficeDesktopApp.Controls"
       xmlns:viewmodels="clr-namespace:LawOfficeDesktopApp.ViewModels"
-      d:DataContext="{d:DesignInstance Type=viewmodels:AddConsultationViewModel}"
+      d:DataContext="{d:DesignInstance Type=viewmodels:AddRequestAsEmployeeViewModel}"
       TextElement.Foreground="{DynamicResource MaterialDesignBody}"
       TextElement.FontWeight="Regular"
       TextElement.FontSize="13"
@@ -23,20 +23,20 @@
         <controls:Header HeaderText="Записать на консультацию"
                          BorderWidth="0" />
         <ComboBox ItemsSource="{Binding Services}"
-                  SelectedItem="{Binding Consultation.Service, ValidatesOnDataErrors=True}"
-                  DisplayMemberPath="Title"
+                  SelectedItem="{Binding Request.Service, ValidatesOnDataErrors=True}"
+                  DisplayMemberPath="FormattedRepresentation"
                   materialDesign:HintAssist.Hint="Услуга"
                   Style="{StaticResource MaterialDesignFilledComboBox}"
                   Margin="0,5" />
         <ComboBox ItemsSource="{Binding Customers}"
-                  SelectedItem="{Binding Consultation.User, ValidatesOnDataErrors=True}"
+                  SelectedItem="{Binding Request.User, ValidatesOnDataErrors=True}"
                   DisplayMemberPath="Login"
                   materialDesign:HintAssist.Hint="Клиент"
                   Style="{StaticResource MaterialDesignFilledComboBox}"
                   Margin="0,5" />
         <Button Content="Записать клиента"
                 Margin="0,20,0,0"
-                Command="{Binding SaveConsultation}"
-                IsEnabled="{Binding Consultation.IsValid}" />
+                Command="{Binding SaveRequest}"
+                IsEnabled="{Binding Request.IsValid}" />
     </StackPanel>
 </Page>

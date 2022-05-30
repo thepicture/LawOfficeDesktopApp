@@ -57,5 +57,13 @@ namespace LawOfficeDesktopApp.Models.Entities
             else if (rublesRemainder == 1) return "рубль";
             else return "рубля";
         }
+
+        public string FormattedRepresentation
+        {
+            get
+            {
+                return $"{Title}, стоимость {PriceAsString}";
+            }
+        }
     }
 }

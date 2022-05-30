@@ -5,14 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="LawOfficeBaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Consultation">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="ServiceId" Type="int" Nullable="false" />
-        </EntityType>
         <EntityType Name="Contact">
           <Key>
             <PropertyRef Name="Id" />
@@ -28,9 +20,10 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CustomerId" Type="int" Nullable="false" />
           <Property Name="PhoneNumber" Type="nvarchar" MaxLength="18" Nullable="false" />
-          <Property Name="QuestionText" Type="nvarchar" MaxLength="2048" Nullable="false" />
+          <Property Name="QuestionText" Type="nvarchar" MaxLength="2048" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="ServiceId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Service">
           <Key>
@@ -61,31 +54,15 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Consultation_Service">
-          <End Role="Service" Type="Self.Service" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Consultation" Type="Self.Consultation" Multiplicity="*" />
+        <Association Name="FK_CustomerRequest_Service">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="CustomerRequest" Type="Self.CustomerRequest" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Service">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Consultation">
+            <Dependent Role="CustomerRequest">
               <PropertyRef Name="ServiceId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Consultation_User">
-          <End Role="User" Type="Self.User" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Consultation" Type="Self.Consultation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Consultation">
-              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -116,19 +93,14 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="LawOfficeBaseModelStoreContainer">
-          <EntitySet Name="Consultation" EntityType="Self.Consultation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Contact" EntityType="Self.Contact" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CustomerRequest" EntityType="Self.CustomerRequest" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Consultation_Service" Association="Self.FK_Consultation_Service">
+          <AssociationSet Name="FK_CustomerRequest_Service" Association="Self.FK_CustomerRequest_Service">
             <End Role="Service" EntitySet="Service" />
-            <End Role="Consultation" EntitySet="Consultation" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Consultation_User" Association="Self.FK_Consultation_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="Consultation" EntitySet="Consultation" />
+            <End Role="CustomerRequest" EntitySet="CustomerRequest" />
           </AssociationSet>
           <AssociationSet Name="FK_CustomerRequest_User" Association="Self.FK_CustomerRequest_User">
             <End Role="User" EntitySet="User" />
@@ -144,19 +116,14 @@
     <edmx:ConceptualModels>
       <Schema Namespace="LawOfficeBaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="LawOfficeBaseEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Consultations" EntityType="LawOfficeBaseModel.Consultation" />
           <EntitySet Name="Contacts" EntityType="LawOfficeBaseModel.Contact" />
           <EntitySet Name="CustomerRequests" EntityType="LawOfficeBaseModel.CustomerRequest" />
           <EntitySet Name="Services" EntityType="LawOfficeBaseModel.Service" />
           <EntitySet Name="Users" EntityType="LawOfficeBaseModel.User" />
           <EntitySet Name="UserRoles" EntityType="LawOfficeBaseModel.UserRole" />
-          <AssociationSet Name="FK_Consultation_Service" Association="LawOfficeBaseModel.FK_Consultation_Service">
+          <AssociationSet Name="FK_CustomerRequest_Service" Association="LawOfficeBaseModel.FK_CustomerRequest_Service">
             <End Role="Service" EntitySet="Services" />
-            <End Role="Consultation" EntitySet="Consultations" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Consultation_User" Association="LawOfficeBaseModel.FK_Consultation_User">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Consultation" EntitySet="Consultations" />
+            <End Role="CustomerRequest" EntitySet="CustomerRequests" />
           </AssociationSet>
           <AssociationSet Name="FK_CustomerRequest_User" Association="LawOfficeBaseModel.FK_CustomerRequest_User">
             <End Role="User" EntitySet="Users" />
@@ -167,16 +134,6 @@
             <End Role="User" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Consultation">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="ServiceId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Service" Relationship="LawOfficeBaseModel.FK_Consultation_Service" FromRole="Consultation" ToRole="Service" />
-          <NavigationProperty Name="User" Relationship="LawOfficeBaseModel.FK_Consultation_User" FromRole="Consultation" ToRole="User" />
-        </EntityType>
         <EntityType Name="Contact">
           <Key>
             <PropertyRef Name="Id" />
@@ -192,9 +149,11 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CustomerId" Type="Int32" Nullable="false" />
           <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="18" FixedLength="false" Unicode="true" />
-          <Property Name="QuestionText" Type="String" Nullable="false" MaxLength="2048" FixedLength="false" Unicode="true" />
+          <Property Name="QuestionText" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="ServiceId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Service" Relationship="LawOfficeBaseModel.FK_CustomerRequest_Service" FromRole="CustomerRequest" ToRole="Service" />
           <NavigationProperty Name="User" Relationship="LawOfficeBaseModel.FK_CustomerRequest_User" FromRole="CustomerRequest" ToRole="User" />
         </EntityType>
         <EntityType Name="Service">
@@ -205,7 +164,7 @@
           <Property Name="Title" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="MinimumOrBasePrice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
           <Property Name="MaximumPrice" Type="Decimal" Precision="19" Scale="4" />
-          <NavigationProperty Name="Consultations" Relationship="LawOfficeBaseModel.FK_Consultation_Service" FromRole="Service" ToRole="Consultation" />
+          <NavigationProperty Name="CustomerRequests" Relationship="LawOfficeBaseModel.FK_CustomerRequest_Service" FromRole="Service" ToRole="CustomerRequest" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -219,7 +178,6 @@
           <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ExperienceInYears" Type="Int32" />
-          <NavigationProperty Name="Consultations" Relationship="LawOfficeBaseModel.FK_Consultation_User" FromRole="User" ToRole="Consultation" />
           <NavigationProperty Name="CustomerRequests" Relationship="LawOfficeBaseModel.FK_CustomerRequest_User" FromRole="User" ToRole="CustomerRequest" />
           <NavigationProperty Name="UserRole" Relationship="LawOfficeBaseModel.FK_User_UserRole" FromRole="User" ToRole="UserRole" />
         </EntityType>
@@ -231,31 +189,15 @@
           <Property Name="Title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Users" Relationship="LawOfficeBaseModel.FK_User_UserRole" FromRole="UserRole" ToRole="User" />
         </EntityType>
-        <Association Name="FK_Consultation_Service">
-          <End Type="LawOfficeBaseModel.Service" Role="Service" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="LawOfficeBaseModel.Consultation" Role="Consultation" Multiplicity="*" />
+        <Association Name="FK_CustomerRequest_Service">
+          <End Type="LawOfficeBaseModel.Service" Role="Service" Multiplicity="1" />
+          <End Type="LawOfficeBaseModel.CustomerRequest" Role="CustomerRequest" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Service">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Consultation">
+            <Dependent Role="CustomerRequest">
               <PropertyRef Name="ServiceId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Consultation_User">
-          <End Type="LawOfficeBaseModel.User" Role="User" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="LawOfficeBaseModel.Consultation" Role="Consultation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Consultation">
-              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -291,15 +233,6 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="LawOfficeBaseModelStoreContainer" CdmEntityContainer="LawOfficeBaseEntities">
-          <EntitySetMapping Name="Consultations">
-            <EntityTypeMapping TypeName="LawOfficeBaseModel.Consultation">
-              <MappingFragment StoreEntitySet="Consultation">
-                <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Contacts">
             <EntityTypeMapping TypeName="LawOfficeBaseModel.Contact">
               <MappingFragment StoreEntitySet="Contact">
@@ -314,9 +247,10 @@
           <EntitySetMapping Name="CustomerRequests">
             <EntityTypeMapping TypeName="LawOfficeBaseModel.CustomerRequest">
               <MappingFragment StoreEntitySet="CustomerRequest">
+                <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
                 <ScalarProperty Name="QuestionText" ColumnName="QuestionText" />
                 <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

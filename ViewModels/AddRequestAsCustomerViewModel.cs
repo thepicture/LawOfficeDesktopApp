@@ -2,19 +2,32 @@
 using LawOfficeDesktopApp.Services;
 using Microsoft.Toolkit.Mvvm.DependencyInjection;
 using Microsoft.Xaml.Behaviors.Core;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace LawOfficeDesktopApp.ViewModels
 {
-    public class AddRequestViewModel : ViewModelBase
+    [PropertyChanged.AddINotifyPropertyChangedInterface]
+    public class AddRequestAsCustomerViewModel : ViewModelBase
     {
         public CustomerRequest Request { get; set; } = new CustomerRequest
         {
             CustomerId = App.CurrentUser.Id
         };
-        public AddRequestViewModel()
+        public AddRequestAsCustomerViewModel()
         {
             Title = "Оставить заявку";
+            LoadServicesAsync();
+        }
+
+        private async void LoadServicesAsync()
+        {
+            IEnumerable<Service> currentServices = await Ioc.Default
+               .GetService<IRepository<Service>>()
+               .GetAllAsync();
+            Services = new ObservableCollection<Service>(currentServices);
         }
 
         private ActionCommand addRequest;
@@ -39,5 +52,7 @@ namespace LawOfficeDesktopApp.ViewModels
                 Navigator.GoBack();
             }
         }
+
+        public ObservableCollection<Service> Services { get; set; }
     }
 }

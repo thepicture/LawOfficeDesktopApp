@@ -15,10 +15,12 @@ namespace LawOfficeDesktopApp.Models.Entities
     public partial class CustomerRequest
     {
         public int Id { get; set; }
-        public int CustomerId { get; set; }
         public string PhoneNumber { get; set; }
         public string QuestionText { get; set; }
+        public int CustomerId { get; set; }
+        public int ServiceId { get; set; }
     
+        public virtual Service Service { get; set; }
         public virtual User User { get; set; }
     }
 }

@@ -17,7 +17,7 @@ namespace LawOfficeDesktopApp.ViewModels
 
         private ActionCommand goToPriceViewModel;
         public ObservableCollection<User> Customers { get; set; }
-        public ObservableCollection<Consultation> Consultations { get; set; }
+        public ObservableCollection<CustomerRequest> Requests { get; set; }
 
         public ICommand GoToPriceViewModel
         {
@@ -45,32 +45,32 @@ namespace LawOfficeDesktopApp.ViewModels
             Navigator.Navigated += () =>
             {
                 LoadCustomersAsync();
-                LoadConsultationsAsync();
+                LoadRequests();
             };
         }
 
-        private async void LoadConsultationsAsync()
+        private async void LoadRequests()
         {
-            IEnumerable<Consultation> currentConsulations = await Ioc.Default
-                .GetService<IRepository<Consultation>>()
+            IEnumerable<CustomerRequest> currentRequests = await Ioc.Default
+                .GetService<IRepository<CustomerRequest>>()
                 .GetAllAsync();
-            if (!string.IsNullOrWhiteSpace(ConsultationSearchText))
+            if (!string.IsNullOrWhiteSpace(RequestSearchText))
             {
-                currentConsulations = currentConsulations.Where(c =>
+                currentRequests = currentRequests.Where(c =>
                 {
                     string rawPhoneNumber = string.Join("",
-                                                        c.User.PhoneNumber.Where(p =>
+                                                        c.PhoneNumber.Where(p =>
                                                         {
                                                             return char.IsDigit(p);
                                                         }));
-                    return rawPhoneNumber.Contains(ConsultationSearchText)
-                           || c.User.Login.IndexOf(ConsultationSearchText,
+                    return rawPhoneNumber.Contains(RequestSearchText)
+                           || c.User.Login.IndexOf(RequestSearchText,
                                                    StringComparison.OrdinalIgnoreCase) != -1
-                           || c.Service.Title.IndexOf(ConsultationSearchText,
+                           || c.Service.Title.IndexOf(RequestSearchText,
                                                       StringComparison.OrdinalIgnoreCase) != -1;
                 });
             }
-            Consultations = new ObservableCollection<Consultation>(currentConsulations);
+            Requests = new ObservableCollection<CustomerRequest>(currentRequests);
         }
 
         private async void LoadCustomersAsync()
@@ -125,15 +125,15 @@ namespace LawOfficeDesktopApp.ViewModels
             }
         }
 
-        private Consultation selectedConsultation;
+        private CustomerRequest selectedRequest;
 
-        public Consultation SelectedConsultation
+        public CustomerRequest SelectedRequest
         {
-            get => selectedConsultation;
+            get => selectedRequest;
             set
             {
-                SetProperty(ref selectedConsultation, value);
-                DeleteConsultationCommand.NotifyCanExecuteChanged();
+                SetProperty(ref selectedRequest, value);
+                DeleteRequestCommand.NotifyCanExecuteChanged();
             }
         }
 
@@ -165,29 +165,29 @@ namespace LawOfficeDesktopApp.ViewModels
             }
         }
 
-        private RelayCommand deleteConsultationCommand;
+        private RelayCommand deleteRequestCommand;
 
-        public RelayCommand DeleteConsultationCommand
+        public RelayCommand DeleteRequestCommand
         {
             get
             {
-                if (deleteConsultationCommand == null)
-                    deleteConsultationCommand = new RelayCommand(DeleteConsultationAsync,
-                                                                 () => SelectedConsultation != null);
+                if (deleteRequestCommand == null)
+                    deleteRequestCommand = new RelayCommand(DeleteRequestAsync,
+                                                                 () => SelectedRequest != null);
 
-                return deleteConsultationCommand;
+                return deleteRequestCommand;
             }
         }
 
-        private async void DeleteConsultationAsync()
+        private async void DeleteRequestAsync()
         {
-            if (await NotificationService.AskAsync("Удалить данные о консультации?"))
+            if (await NotificationService.AskAsync("Удалить данные о заявке?"))
             {
                 if (await Ioc.Default
-                        .GetService<IRepository<Consultation>>()
-                        .DeleteAsync(SelectedConsultation.Id))
+                        .GetService<IRepository<CustomerRequest>>()
+                        .DeleteAsync(SelectedRequest.Id))
                 {
-                    LoadConsultationsAsync();
+                    LoadRequests();
                 }
             }
         }
@@ -211,23 +211,23 @@ namespace LawOfficeDesktopApp.ViewModels
             Navigator.Go<AddCustomerViewModel>();
         }
 
-        private RelayCommand goToAddConsultationViewModel;
+        private RelayCommand goToAddRequestViewModel;
 
-        public ICommand GoToAddConsultationViewModel
+        public ICommand GoToAddRequestViewModel
         {
             get
             {
-                if (goToAddConsultationViewModel == null)
-                    goToAddConsultationViewModel =
-                        new RelayCommand(PerformGoToAddConsultationViewModel);
+                if (goToAddRequestViewModel == null)
+                    goToAddRequestViewModel =
+                        new RelayCommand(PerformGoToAddRequestViewModel);
 
-                return goToAddConsultationViewModel;
+                return goToAddRequestViewModel;
             }
         }
 
-        private void PerformGoToAddConsultationViewModel()
+        private void PerformGoToAddRequestViewModel()
         {
-            Navigator.Go<AddConsultationViewModel>();
+            Navigator.Go<AddRequestAsEmployeeViewModel>();
         }
 
         private string customerSearchText;
@@ -243,15 +243,15 @@ namespace LawOfficeDesktopApp.ViewModels
             }
         }
 
-        private string consultationSearchText;
+        private string requestSearchText;
 
-        public string ConsultationSearchText
+        public string RequestSearchText
         {
-            get => consultationSearchText; set
+            get => requestSearchText; set
             {
-                if (SetProperty(ref consultationSearchText, value))
+                if (SetProperty(ref requestSearchText, value))
                 {
-                    LoadConsultationsAsync();
+                    LoadRequests();
                 }
             }
         }

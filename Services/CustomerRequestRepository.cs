@@ -2,6 +2,7 @@
 using Microsoft.Toolkit.Mvvm.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,20 @@ namespace LawOfficeDesktopApp.Services
     {
         public async Task<bool> CreateAsync(CustomerRequest item)
         {
+            if (item.PhoneNumber == null)
+            {
+                item.PhoneNumber = item.User.PhoneNumber;
+            }
+            if (item.User != null)
+            {
+                item.CustomerId = item.User.Id;
+                item.User = null;
+            }
+            if (item.Service != null)
+            {
+                item.ServiceId = item.Service.Id;
+                item.Service = null;
+            }
             return await Task.Run(() =>
             {
                 using (LawOfficeBaseEntities entities = new LawOfficeBaseEntities())
@@ -36,14 +51,46 @@ namespace LawOfficeDesktopApp.Services
             });
         }
 
-        public Task<bool> DeleteAsync(object id)
+        public async Task<bool> DeleteAsync(object id)
         {
-            throw new NotImplementedException();
+            return await Task.Run(() =>
+            {
+                using (LawOfficeBaseEntities entities = new LawOfficeBaseEntities())
+                {
+                    try
+                    {
+                        string idAsString = id.ToString();
+                        CustomerRequest request = entities.CustomerRequests
+                            .First(r =>
+                                r.Id.ToString()
+                                == idAsString);
+                        entities.CustomerRequests.Remove(request);
+                        entities.SaveChanges();
+                        Ioc.Default
+                            .GetService<INotificationService>()
+                            .NotifyAsync("Заявка удалена");
+                        return true;
+                    }
+                    catch (Exception ex)
+                    {
+                        Ioc.Default
+                            .GetService<INotificationService>()
+                            .NotifyErrorAsync(ex);
+                        return false;
+                    }
+                }
+            });
         }
 
-        public Task<IEnumerable<CustomerRequest>> GetAllAsync()
+        public async Task<IEnumerable<CustomerRequest>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            using (LawOfficeBaseEntities entities = new LawOfficeBaseEntities())
+            {
+                return await entities.CustomerRequests
+                    .Include(r => r.Service)
+                    .Include(r => r.User)
+                    .ToListAsync();
+            }
         }
 
         public Task<CustomerRequest> GetSingleAsync(object id)

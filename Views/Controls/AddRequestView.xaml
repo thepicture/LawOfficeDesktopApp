@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:LawOfficeDesktopApp.Views.Controls"
       xmlns:viewmodels="clr-namespace:LawOfficeDesktopApp.ViewModels"
-      d:DataContext="{d:DesignInstance Type=viewmodels:AddRequestViewModel}"
+      d:DataContext="{d:DesignInstance Type=viewmodels:AddRequestAsCustomerViewModel}"
       mc:Ignorable="d"
       d:DesignHeight="450"
       d:DesignWidth="800"
@@ -26,18 +26,27 @@
             <RowDefinition Height="3*" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
-        <controls:Header HeaderText="Оставить заявку" BorderWidth="0"/>
+        <controls:Header HeaderText="Оставить заявку"
+                         BorderWidth="0" />
         <TextBox Text="{Binding Request.QuestionText, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-                 materialDesign:HintAssist.Hint="Ваш Вопрос" 
+                 materialDesign:HintAssist.Hint="Ваш Вопрос"
                  TextWrapping="Wrap"
-                 Grid.Row="1"/>
+                 Grid.Row="1" />
+        <ComboBox ItemsSource="{Binding Services}"
+                  SelectedItem="{Binding Request.Service, ValidatesOnDataErrors=True}"
+                  DisplayMemberPath="FormattedRepresentation"
+                  materialDesign:HintAssist.Hint="Выберите услугу"
+                  Grid.Row="2" />
+
         <xctk:MaskedTextBox Text="{Binding Request.PhoneNumber, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                             Mask="+7 (###) ###-##-##"
-                            materialDesign:HintAssist.Hint="Номер телефона" 
-                            Grid.Row="2"/>
-        <Button Content="Отправить заявку" Command="{Binding AddRequest}"
+                            materialDesign:HintAssist.Hint="Номер телефона"
+                            Grid.Row="3" />
+        <Button Content="Отправить заявку"
+                Command="{Binding AddRequest}"
                 IsEnabled="{Binding Request.IsValid}"
-                Grid.Row="3"/>
+                Grid.Row="4" />
     </Grid>
 </Page>
