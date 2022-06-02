@@ -44,4 +44,10 @@
     <DataTemplate DataType="{x:Type viewmodels:AddEditServiceViewModel}">
         <controls:AddEditServiceView />
     </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:EnterEmployeePasswordViewModel}">
+        <controls:EnterEmployeePasswordView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:EmployeeRegistrationViewModel}">
+        <controls:EmployeeRegistrationView />
+    </DataTemplate>
 </ResourceDictionary>

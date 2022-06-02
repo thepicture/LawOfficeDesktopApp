@@ -79,5 +79,23 @@ namespace LawOfficeDesktopApp.ViewModels
         {
             Navigator.Go<EmployeeLoginViewModel>();
         }
+
+        private ActionCommand goToEnterEmployeePasswordViewModel;
+
+        public ICommand GoToEnterEmployeePasswordViewModel
+        {
+            get
+            {
+                if (goToEnterEmployeePasswordViewModel == null)
+                    goToEnterEmployeePasswordViewModel = new ActionCommand(PerformGoToEnterEmployeePasswordViewModel);
+
+                return goToEnterEmployeePasswordViewModel;
+            }
+        }
+
+        private void PerformGoToEnterEmployeePasswordViewModel()
+        {
+            Navigator.Go<EnterEmployeePasswordViewModel>();
+        }
     }
 }

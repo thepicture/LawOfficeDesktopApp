@@ -49,5 +49,9 @@
                 Command="{Binding GoToCustomerLoginViewModel}"
                 Margin="0,10,0,0"
                 Style="{StaticResource MaterialDesignFlatSecondaryMidBgButton}" />
+        <Button Content="Зарегистрироваться как персонал"
+                Command="{Binding GoToEnterEmployeePasswordViewModel}"
+                Margin="0,10,0,0"
+                Style="{StaticResource MaterialDesignFlatSecondaryMidBgButton}" />
     </StackPanel>
 </Page>

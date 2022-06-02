@@ -17,10 +17,6 @@ namespace LawOfficeDesktopApp.Controls
         public static readonly DependencyProperty BorderWidthProperty =
             DependencyProperty.Register("BorderWidth", typeof(int), typeof(Header), new PropertyMetadata(1));
 
-
-
-
-
         public string HeaderText
         {
             get { return (string)GetValue(HeaderTextProperty); }
