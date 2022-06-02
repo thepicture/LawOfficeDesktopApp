@@ -10,11 +10,11 @@ namespace LawOfficeDesktopApp.ViewModels
     [PropertyChanged.AddINotifyPropertyChangedInterface]
     public class AddEditEmployeeViewModel : ViewModelBase
     {
-        public CustomerRegistrationUser Employee { get; set; }
+        public RegistrationUser Employee { get; set; }
         public AddEditEmployeeViewModel()
         {
             Title = "Добавление персонала";
-            Employee = new CustomerRegistrationUser
+            Employee = new RegistrationUser
             {
                 RoleId = 2
             };
@@ -28,7 +28,7 @@ namespace LawOfficeDesktopApp.ViewModels
         public AddEditEmployeeViewModel(User inputEmployee)
         {
             Title = "Редактирование персонала";
-            Employee = new CustomerRegistrationUser
+            Employee = new RegistrationUser
             {
                 Id = inputEmployee.Id,
                 Login = inputEmployee.Login,
@@ -65,7 +65,7 @@ namespace LawOfficeDesktopApp.ViewModels
             {
 
                 if (await Ioc.Default
-                        .GetService<IRepository<CustomerRegistrationUser>>()
+                        .GetService<IRepository<RegistrationUser>>()
                         .CreateAsync(Employee))
                 {
                     Navigator.GoBack();
@@ -76,7 +76,7 @@ namespace LawOfficeDesktopApp.ViewModels
             else
             {
                 if (await Ioc.Default
-                        .GetService<IRepository<CustomerRegistrationUser>>()
+                        .GetService<IRepository<RegistrationUser>>()
                         .UpdateAsync(Employee))
                 {
                     Navigator.GoBack();

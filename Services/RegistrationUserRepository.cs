@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace LawOfficeDesktopApp.Services
 {
-    public class CustomerRegistrationUserRepository : IRepository<CustomerRegistrationUser>
+    public class RegistrationUserRepository : IRepository<RegistrationUser>
     {
-        public async Task<bool> CreateAsync(CustomerRegistrationUser item)
+        public async Task<bool> CreateAsync(RegistrationUser item)
         {
             return await Task.Run(() =>
             {
@@ -23,6 +23,11 @@ namespace LawOfficeDesktopApp.Services
                            .GetService<INotificationService>()
                            .NotifyErrorAsync("Такой логин уже есть");
                         return false;
+                    }
+                    if (item.UserRole != null)
+                    {
+                        item.RoleId = item.UserRole.Id;
+                        item.UserRole = null;
                     }
                     User user = new User
                     {
@@ -69,17 +74,17 @@ namespace LawOfficeDesktopApp.Services
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<CustomerRegistrationUser>> GetAllAsync()
+        public Task<IEnumerable<RegistrationUser>> GetAllAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task<CustomerRegistrationUser> GetSingleAsync(object id)
+        public Task<RegistrationUser> GetSingleAsync(object id)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<bool> UpdateAsync(CustomerRegistrationUser item)
+        public async Task<bool> UpdateAsync(RegistrationUser item)
         {
             return await Task.Run(() =>
             {

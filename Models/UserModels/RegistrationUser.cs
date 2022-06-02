@@ -4,7 +4,7 @@ using Microsoft.Toolkit.Mvvm.ComponentModel;
 namespace LawOfficeDesktopApp.Models.UserModels
 {
     [PropertyChanged.AddINotifyPropertyChangedInterface]
-    public class CustomerRegistrationUser : User
+    public class RegistrationUser : User
     {
         public bool IsNew => Id == 0;
     }

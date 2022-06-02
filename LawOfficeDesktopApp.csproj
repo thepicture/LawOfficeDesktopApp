@@ -216,7 +216,7 @@
     <Compile Include="Models\Partial\PartialEmployee.cs" />
     <Compile Include="Models\Partial\PartialService.cs" />
     <Compile Include="Models\Partial\PartialUser.cs" />
-    <Compile Include="Models\UserModels\CustomerRegistrationUser.cs" />
+    <Compile Include="Models\UserModels\RegistrationUser.cs" />
     <Compile Include="Models\UserModels\LoginUser.cs" />
     <Compile Include="Services\ContactsRepository.cs" />
     <Compile Include="Services\Guard.cs" />
@@ -228,7 +228,8 @@
     <Compile Include="Services\IRepository.cs" />
     <Compile Include="Services\Navigator.cs" />
     <Compile Include="Services\NotificationService.cs" />
-    <Compile Include="Services\CustomerRegistrationUserRepository.cs" />
+    <Compile Include="Services\RegistrationUserRepository.cs" />
+    <Compile Include="Services\RoleRepository.cs" />
     <Compile Include="Services\ServiceRepository.cs" />
     <Compile Include="Services\UserRepository.cs" />
     <Compile Include="ViewModels\AddRequestAsEmployeeViewModel.cs" />

@@ -31,6 +31,9 @@ namespace LawOfficeDesktopApp.Models.Entities
                 if (columnName == nameof(Login))
                     if (string.IsNullOrWhiteSpace(Login))
                         currentError = "Введите логин";
+                if (columnName == nameof(UserRole))
+                    if (UserRole == null)
+                        currentError = "Выберите должность";
                 if (columnName == nameof(PhoneNumber) && (string.IsNullOrWhiteSpace(PhoneNumber)
                                                           || PhoneNumber.Length != 18
                                                           || PhoneNumber

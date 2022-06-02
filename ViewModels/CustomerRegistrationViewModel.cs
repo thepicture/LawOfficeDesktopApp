@@ -9,11 +9,11 @@ namespace LawOfficeDesktopApp.ViewModels
     [PropertyChanged.AddINotifyPropertyChangedInterface]
     public class CustomerRegistrationViewModel : ViewModelBase
     {
-        public CustomerRegistrationUser User { get; set; }
+        public RegistrationUser User { get; set; }
         public CustomerRegistrationViewModel()
         {
             Title = "Регистрация";
-            User = new CustomerRegistrationUser
+            User = new RegistrationUser
             {
                 RoleId = 1
             };
@@ -35,12 +35,10 @@ namespace LawOfficeDesktopApp.ViewModels
         private async void PerformRegisterAsCustomerAsync()
         {
             if (await Ioc.Default
-                    .GetService<IRepository<CustomerRegistrationUser>>()
+                    .GetService<IRepository<RegistrationUser>>()
                     .CreateAsync(User))
             {
-                Ioc.Default
-                    .GetService<INavigator<ViewModelBase>>()
-                    .Go<CustomerLoginViewModel>();
+                Navigator.Go<CustomerLoginViewModel>();
             }
         }
 

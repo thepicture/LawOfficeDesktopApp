@@ -8,11 +8,11 @@ namespace LawOfficeDesktopApp.ViewModels
 {
     public class AddCustomerViewModel : ViewModelBase
     {
-        public CustomerRegistrationUser User { get; set; }
+        public RegistrationUser User { get; set; }
         public AddCustomerViewModel()
         {
             Title = "Добавление клиента";
-            User = new CustomerRegistrationUser
+            User = new RegistrationUser
             {
                 RoleId = 1
             };
@@ -35,7 +35,7 @@ namespace LawOfficeDesktopApp.ViewModels
         {
             App.IsAddingUser = true;
             if (await Ioc.Default
-                    .GetService<IRepository<CustomerRegistrationUser>>()
+                    .GetService<IRepository<RegistrationUser>>()
                     .CreateAsync(User))
             {
                 Navigator.GoBack();
