@@ -1,4 +1,6 @@
-﻿using Microsoft.Xaml.Behaviors.Core;
+﻿using LawOfficeDesktopApp.Services;
+using Microsoft.Toolkit.Mvvm.DependencyInjection;
+using Microsoft.Xaml.Behaviors.Core;
 using System.Windows.Input;
 
 namespace LawOfficeDesktopApp.ViewModels
@@ -6,6 +8,8 @@ namespace LawOfficeDesktopApp.ViewModels
     [PropertyChanged.AddINotifyPropertyChangedInterface]
     public class EnterEmployeePasswordViewModel : ViewModelBase
     {
+        public IGuard<string> PasswordGuard =>
+            Ioc.Default.GetService<IGuard<string>>();
         public EnterEmployeePasswordViewModel()
         {
             Title = "Введите пароль для доступа";
@@ -13,7 +17,11 @@ namespace LawOfficeDesktopApp.ViewModels
 
         private string password;
 
-        public string Password { get => password; set => SetProperty(ref password, value); }
+        public string Password
+        {
+            get => password;
+            set => SetProperty(ref password, value);
+        }
 
         private ActionCommand goToEmployeeRegistrationViewModel;
 
@@ -22,7 +30,7 @@ namespace LawOfficeDesktopApp.ViewModels
             get
             {
                 if (goToEmployeeRegistrationViewModel == null)
-                    goToEmployeeRegistrationViewModel = 
+                    goToEmployeeRegistrationViewModel =
                         new ActionCommand(PerformGoToEmployeeRegistrationViewModel);
 
                 return goToEmployeeRegistrationViewModel;
@@ -31,6 +39,16 @@ namespace LawOfficeDesktopApp.ViewModels
 
         private void PerformGoToEmployeeRegistrationViewModel()
         {
+            if (PasswordGuard.Verify(Password))
+            {
+                Navigator.Go<EmployeeRegistrationViewModel>();
+            }
+            else
+            {
+                NotificationService.NotifyErrorAsync("Неверный пароль доступа. "
+                                                     + "Проверьте введённые данные "
+                                                     + "и попробуйте ещё раз");
+            }
         }
     }
 }

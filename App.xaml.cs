@@ -25,6 +25,7 @@ namespace LawOfficeDesktopApp
                 new ServiceCollection()
                     .AddSingleton<INavigator<ViewModelBase>, Navigator>()
                     .AddSingleton<INotificationService, NotificationService>()
+                    .AddSingleton<IGuard<string>, Guard>()
                     .AddSingleton<IRepository<CustomerRegistrationUser>, CustomerRegistrationUserRepository>()
                     .AddSingleton<IRepository<LoginUser>, LoginUserRepository>()
                     .AddSingleton<IRepository<User>, UserRepository>()

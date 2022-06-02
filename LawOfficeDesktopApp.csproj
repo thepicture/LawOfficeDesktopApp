@@ -219,6 +219,8 @@
     <Compile Include="Models\UserModels\CustomerRegistrationUser.cs" />
     <Compile Include="Models\UserModels\LoginUser.cs" />
     <Compile Include="Services\ContactsRepository.cs" />
+    <Compile Include="Services\Guard.cs" />
+    <Compile Include="Services\IGuard.cs" />
     <Compile Include="Services\LoginUserRepository.cs" />
     <Compile Include="Services\CustomerRequestRepository.cs" />
     <Compile Include="Services\INavigator.cs" />
