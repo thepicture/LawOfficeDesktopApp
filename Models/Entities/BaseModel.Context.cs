@@ -12,19 +12,18 @@ namespace LawOfficeDesktopApp.Models.Entities
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
+
     public partial class LawOfficeBaseEntities : DbContext
     {
-        public LawOfficeBaseEntities()
-            : base("name=LawOfficeBaseEntities")
+        public LawOfficeBaseEntities() : base(App.Connection)
         {
         }
-    
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
-    
+
         public virtual DbSet<Contact> Contacts { get; set; }
         public virtual DbSet<CustomerRequest> CustomerRequests { get; set; }
         public virtual DbSet<Service> Services { get; set; }
